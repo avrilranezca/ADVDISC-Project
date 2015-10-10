@@ -82,12 +82,14 @@ public class Line extends Shape{
 	@Override
 	public void rescaleX(double percentage) {
 		// TODO Auto-generated method stub
-		
+		head.setX((int)Math.round(head.getX() * percentage));
+		tail.setX((int)Math.round(tail.getX() * percentage));
 	}
 
 	@Override
 	public void rescaleY(double percentage) {
 		// TODO Auto-generated method stub
-		
+		head.setY((int)Math.round(head.getY() * percentage));
+		tail.setY((int)Math.round(tail.getY() * percentage));
 	}
 }
