@@ -78,4 +78,16 @@ public class Line extends Shape{
 		head.setX(-head.getX());
 		tail.setX(-tail.getX());
 	}
+
+	@Override
+	public void rescaleX(double percentage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rescaleY(double percentage) {
+		// TODO Auto-generated method stub
+		
+	}
 }
