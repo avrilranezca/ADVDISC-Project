@@ -39,6 +39,43 @@ public class Line extends Shape{
 	@Override
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
-		
+		if(angle%90 == 0) {
+			while(angle < 0) {
+				angle += 360;
+			}
+			
+			while(angle > 0) {
+				int tempX;
+				int tempY;
+				
+				tempX = head.getX();
+				tempY = head.getY();
+				
+				head.setX(-tempY);
+				head.setY(tempX);
+				
+				tempX = tail.getX();
+				tempY = tail.getY();
+				
+				tail.setX(-tempY);
+				tail.setY(tempX);
+				
+				angle -= 90;
+			}
+		}
+	}
+
+	@Override
+	public void reflectOverX() {
+		// TODO Auto-generated method stub
+		head.setY(-head.getY());
+		tail.setY(-tail.getY());
+	}
+
+	@Override
+	public void reflectOverY() {
+		// TODO Auto-generated method stub
+		head.setX(-head.getX());
+		tail.setX(-tail.getX());
 	}
 }

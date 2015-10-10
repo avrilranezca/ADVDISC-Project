@@ -1,6 +1,6 @@
 package model;
 
-public class Point extends Shape {
+public class Point {
 
 	private int x;
 	private int y;
@@ -28,21 +28,6 @@ public class Point extends Shape {
 
 	public String toString() {
 		return "(" + x + "," + y + ")";
-	}
-
-	@Override
-	public void translate(int height, int width) {
-		// TODO Auto-generated method stub
-		
-		this.x = width;
-		this.y = height;
-		
-	}
-
-	@Override
-	public void rotate(double angle) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
