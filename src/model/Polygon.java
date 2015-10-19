@@ -1,6 +1,6 @@
 package model;
 
-public class Polygon extends Shape{
+public class Polygon extends GraphicObject{
 
 	private Point[] points;
 	
@@ -20,7 +20,7 @@ public class Polygon extends Shape{
 	@Override
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
-		if(angle%90 == 0) {
+		/*if(angle%90 == 0) {
 			while(angle < 0) {
 				angle += 360;
 			}
@@ -29,8 +29,8 @@ public class Polygon extends Shape{
 			for(Point point : points) {
 				tempAngle = angle;
 				while(tempAngle > 0) {
-					int tempX;
-					int tempY;
+					double tempX;
+					double tempY;
 					
 					tempX = point.getX();
 					tempY = point.getY();
@@ -41,6 +41,13 @@ public class Polygon extends Shape{
 					tempAngle -= 90;
 				}
 			}
+		}*/
+		for(Point point : points) {
+			double newX = point.getX() * Math.cos(angle) - point.getY() * Math.sin(angle);
+			double newY = point.getX() * Math.sin(angle) + point.getY() * Math.cos(angle);
+			
+			point.setX(newX);
+			point.setY(newY);
 		}
 	}
 

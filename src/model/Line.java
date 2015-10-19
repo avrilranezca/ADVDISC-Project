@@ -1,6 +1,6 @@
 package model;
 
-public class Line extends Shape{
+public class Line extends GraphicObject{
 
 	private Point head;
 	private Point tail;
@@ -39,14 +39,14 @@ public class Line extends Shape{
 	@Override
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
-		if(angle%90 == 0) {
+		/*if(angle%90 == 0) {
 			while(angle < 0) {
 				angle += 360;
 			}
 			
 			while(angle > 0) {
-				int tempX;
-				int tempY;
+				double tempX;
+				double tempY;
 				
 				tempX = head.getX();
 				tempY = head.getY();
@@ -62,7 +62,18 @@ public class Line extends Shape{
 				
 				angle -= 90;
 			}
-		}
+		}*/
+		double newX = head.getX() * Math.cos(angle) - head.getY() * Math.sin(angle);
+		double newY = head.getX() * Math.sin(angle) + head.getY() * Math.cos(angle);
+		
+		head.setX(newX);
+		head.setY(newY);
+		
+		newX = tail.getX() * Math.cos(angle) - tail.getY() * Math.sin(angle);
+		newY = tail.getX() * Math.sin(angle) + tail.getY() * Math.cos(angle);
+		
+		tail.setX(newX);
+		tail.setY(newY);
 	}
 
 	@Override

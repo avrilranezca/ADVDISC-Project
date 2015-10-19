@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Shape {
+public abstract class GraphicObject {
 	
 	public abstract void translate(int height, int width);
 	public abstract void rotate(double angle);
