@@ -4,16 +4,20 @@ public class Parabola extends GraphicObject{
 	
 	private Point vertex;
 	private Point focus;
-	private String directrixAxis;
-	private double directrixValue;
-	
-	public Parabola(Point vertex, Point focus, String directrixAxis, double directrixValue) {
+	private double focalLength;
+	private String direction;
+	private ConicMatrix matrix;
+		
+	public Parabola(Point vertex, Point focus, double focalLength, String direction) {
+		super();
 		this.vertex = vertex;
 		this.focus = focus;
-		this.directrixAxis = directrixAxis;
-		this.directrixValue = directrixValue;
+		this.focalLength = focalLength;
+		this.direction = direction;
+		matrix = new ConicMatrix();
+		convertToMatrix();
 	}
-	
+
 	public Point getVertex() {
 		return vertex;
 	}
@@ -25,28 +29,42 @@ public class Parabola extends GraphicObject{
 	public Point getFocus() {
 		return focus;
 	}
-
+	
 	public void setFocus(Point focus) {
 		this.focus = focus;
 	}
 
-	public String getDirectrixAxis() {
-		return directrixAxis;
+	public double getFocalLength() {
+		return focalLength;
 	}
 
-	public void setDirectrixAxis(String directrixAxis) {
-		this.directrixAxis = directrixAxis;
+	public void setFocalLength(double focalLength) {
+		this.focalLength = focalLength;
 	}
-
-	public double getDirectrixValue() {
-		return directrixValue;
-	}
-
-	public void setDirectrixValue(double directrixValue) {
-		this.directrixValue = directrixValue;
-	}
-
 	
+	public String getDirection() {
+		return direction;
+	}
+	
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public void convertToMatrix()
+	{
+		if(direction.equals("vertical"))
+		{
+			matrix.setA(1);
+			matrix.setB(2);
+			matrix.setC(0);
+			matrix.setE(2 * (-vertex.getX()));
+			matrix.setF(4 * focalLength * -1);
+			matrix.setH(4 * focalLength * (-vertex.getY()) + (vertex.getX() * vertex.getX()) * -1);
+		}
+		
+		//System.out.println(matrix);
+	}
+
 	@Override
 	public void translate(int height, int width) {
 		// TODO Auto-generated method stub
@@ -56,28 +74,69 @@ public class Parabola extends GraphicObject{
 		
 		focus.setX(focus.getX() + width);
 		focus.setY(focus.getY() + height);
-		
-		if(directrixAxis.equals("y")) {
-			directrixValue += height;
-		}
-		else if(directrixAxis.equals("x")) {
-			directrixValue += width;
-		}
 	}
 
 	@Override
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
 		
-		vertex.setX(vertex.getX() * Math.cos(angle) - vertex.getY() * Math.sin(angle));
-		vertex.setY(vertex.getX() * Math.sin(angle) + vertex.getY() * Math.cos(angle));
+		if(angle % 90 == 0) {
+			
+			while(angle < 0) {
+				angle += 360;
+			}
+			
+			while(angle > 360) {
+				angle -= 360;
+			}
+			
+			while(angle >= 90)
+			{
+				/* Opens upwards */
+				if(vertex.getX() == focus.getX() && vertex.getY() < focus.getY()) {
+					double temp = vertex.getX();
+					vertex.setX(vertex.getY());
+					vertex.setY(-temp);
+					
+					temp = focus.getX();
+					focus.setX(focus.getY());
+					vertex.setY(-temp);
+				}
+				/* Opens downwards */
+				else if(vertex.getX() == focus.getX() && vertex.getY() > focus.getY()) {
+					double temp = vertex.getX();
+					vertex.setX(-vertex.getY());
+					vertex.setY(temp);
+					
+					temp = focus.getX();
+					focus.setX(-focus.getY());
+					focus.setY(temp);
+				}
+				/* Opens to the right */
+				else if(vertex.getY() == focus.getY() && vertex.getX() < focus.getX()) {
+					double temp = vertex.getX();
+					vertex.setX(-vertex.getY());
+					vertex.setY(temp);
+					
+					temp = focus.getX();
+					focus.setX(-focus.getY());
+					focus.setY(temp);
+				}
+				/* Opens to the left */
+				else if(vertex.getY() == focus.getY() && vertex.getX() > focus.getY()) {
+					double temp = vertex.getX();
+					vertex.setX(-vertex.getY());
+					vertex.setY(temp);
+					
+					temp = focus.getX();
+					focus.setX(-focus.getY());
+					focus.setY(temp);
+				}
+				
+				angle -= 90;
+			}
+		}
 		
-		focus.setX(focus.getX() * Math.cos(angle) - focus.getY() * Math.sin(angle));
-		focus.setY(focus.getX() * Math.sin(angle) + focus.getY() * Math.cos(angle));
-		
-		/*
-		 * Directrix manipulation here
-		 */
 	}
 
 	@Override
@@ -87,7 +146,7 @@ public class Parabola extends GraphicObject{
 		vertex.setY(-vertex.getY());
 		focus.setY(-focus.getY());
 		
-		directrixValue = -directrixValue;
+		/*directrixValue = -directrixValue;*/
 	}
 
 	@Override
@@ -97,7 +156,7 @@ public class Parabola extends GraphicObject{
 		vertex.setX(-vertex.getX());
 		focus.setY(-vertex.getY());
 		
-		directrixValue = -directrixValue;
+		/*directrixValue = -directrixValue;*/
 	}
 
 	@Override
