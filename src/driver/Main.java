@@ -4,19 +4,18 @@ import model.GraphicObject;
 import model.Line;
 import model.Parabola;
 import model.Point;
+import model.Polygon;
 
 public class Main {
 
 	public static void main(String[] args) {
-		/*GraphicObject shape = new Line(new Point(1, 3), new Point(4, 2));
-		shape.rescaleX(0.5);
-		System.out.println( ((Line) shape).getTail());*/
-		
-		GraphicObject shape = new Parabola(new Point(2, -1), new Point(2, 1), "x", -3);
-		System.out.println(((Parabola) shape).getVertex());
-		shape.translate(3, 4);
-		System.out.println( ((Parabola) shape).getVertex());
-		System.out.println( ((Parabola) shape).getFocus());
-		System.out.println( ((Parabola) shape).getDirectrixAxis() + "=" + ((Parabola) shape).getDirectrixValue());
+		Point[] points = new Point[4];
+		points[0] = new Point(-1, 1);
+		points[1] = new Point(1, 1);
+		points[2] = new Point(1, -1);
+		points[3] = new Point(-1, -1);
+		Polygon polygon = new Polygon(points);
+		polygon.shearX(45);
+		System.out.println(polygon);
 	}
 }

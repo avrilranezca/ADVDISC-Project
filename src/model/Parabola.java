@@ -112,4 +112,16 @@ public class Parabola extends GraphicObject{
 		
 	}
 
+	@Override
+	public void shearX(double angle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void shearY(double angle) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

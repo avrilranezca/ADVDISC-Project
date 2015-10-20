@@ -42,12 +42,26 @@ public class Polygon extends GraphicObject{
 				}
 			}
 		}*/
+		System.out.println(this);
+		double sumX = 0;
+		double sumY = 0;
+		
 		for(Point point : points) {
+			sumX += point.getX();
+			sumY += point.getY();
+		}
+		
+		Point center = new Point(sumX/points.length, sumY/points.length);
+		System.out.println(center);
+		for(Point point : points) {
+			point.setX(point.getX() - center.getX());
+			point.setY(point.getY() - center.getY());
+			
 			double newX = point.getX() * Math.cos(angle) - point.getY() * Math.sin(angle);
 			double newY = point.getX() * Math.sin(angle) + point.getY() * Math.cos(angle);
 			
-			point.setX(newX);
-			point.setY(newY);
+			point.setX(newX + center.getX());
+			point.setY(newY + center.getY());
 		}
 	}
 
@@ -71,7 +85,7 @@ public class Polygon extends GraphicObject{
 	public void rescaleX(double percentage) {
 		// TODO Auto-generated method stub
 		for(Point point : points) {
-			point.setX((int)Math.round(point.getX() * percentage));
+			point.setX(point.getX() * percentage);
 		}
 	}
 
@@ -79,7 +93,50 @@ public class Polygon extends GraphicObject{
 	public void rescaleY(double percentage) {
 		// TODO Auto-generated method stub
 		for(Point point : points) {
-			point.setY((int)Math.round(point.getY() * percentage));
+			point.setY(point.getY() * percentage);
+		}
+	}
+	
+	public String toString() {
+		String pointList = "";
+		for(Point point : points) {
+			pointList += point + "\n";
+		}
+		return pointList;
+	}
+
+	@Override
+	public void shearX(double angle) {
+		// TODO Auto-generated method stub
+		double minY = points[0].getY();
+		
+		for(int i = 1; i < points.length; i++) {
+			if(points[i].getY() < minY) {
+				minY = points[i].getY();
+			}
+		}
+		
+		for(Point point : points) {
+			if(point.getY() > minY) {
+				point.setX(point.getX() + Math.tan(angle) * point.getY());
+			}
+		}
+	}
+
+	@Override
+	public void shearY(double angle) {
+		// TODO Auto-generated method stub
+		double minX = points[0].getX();
+		
+		for(int i = 1; i < points.length; i++) {
+			if(points[i].getX() < minX) {
+				minX = points[i].getX();
+			}
+		}
+		for(Point point : points) {
+			if(point.getX() > minX) {
+				point.setY(point.getY() + Math.tan(angle) * point.getX());
+			}
 		}
 	}
 
