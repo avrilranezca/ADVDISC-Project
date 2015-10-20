@@ -63,17 +63,25 @@ public class Line extends GraphicObject{
 				angle -= 90;
 			}
 		}*/
+		Point center = new Point((head.getX()+tail.getX())/2, (head.getY()+tail.getY())/2);
+		
+		head.setX(head.getX() - center.getX());
+		head.setY(head.getY() - center.getY());
+		
 		double newX = head.getX() * Math.cos(angle) - head.getY() * Math.sin(angle);
 		double newY = head.getX() * Math.sin(angle) + head.getY() * Math.cos(angle);
 		
-		head.setX(newX);
-		head.setY(newY);
+		head.setX(newX + center.getX());
+		head.setY(newY + center.getY());
+		
+		tail.setX(tail.getX() - center.getX());
+		tail.setY(tail.getY() - center.getY());
 		
 		newX = tail.getX() * Math.cos(angle) - tail.getY() * Math.sin(angle);
 		newY = tail.getX() * Math.sin(angle) + tail.getY() * Math.cos(angle);
 		
-		tail.setX(newX);
-		tail.setY(newY);
+		tail.setX(newX + center.getX());
+		tail.setY(newY + center.getY());
 	}
 
 	@Override
