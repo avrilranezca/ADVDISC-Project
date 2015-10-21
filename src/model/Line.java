@@ -29,11 +29,8 @@ public class Line extends GraphicObject{
 	@Override
 	public void translate(int height, int width) {
 		// TODO Auto-generated method stub
-		head.setX(head.getX() + width);
-		head.setY(head.getY() + height);
-		
-		tail.setX(tail.getX() + width);
-		tail.setY(tail.getY() + height);
+		head.translate(height, width);
+		tail.translate(height, width);
 	}
 
 	@Override
@@ -68,59 +65,59 @@ public class Line extends GraphicObject{
 		head.setX(head.getX() - center.getX());
 		head.setY(head.getY() - center.getY());
 		
-		double newX = head.getX() * Math.cos(angle) - head.getY() * Math.sin(angle);
-		double newY = head.getX() * Math.sin(angle) + head.getY() * Math.cos(angle);
+		head.rotate(angle);
 		
-		head.setX(newX + center.getX());
-		head.setY(newY + center.getY());
+		head.setX(head.getX() + center.getX());
+		head.setY(head.getY() + center.getY());
 		
 		tail.setX(tail.getX() - center.getX());
 		tail.setY(tail.getY() - center.getY());
 		
-		newX = tail.getX() * Math.cos(angle) - tail.getY() * Math.sin(angle);
-		newY = tail.getX() * Math.sin(angle) + tail.getY() * Math.cos(angle);
+		tail.rotate(angle);
 		
-		tail.setX(newX + center.getX());
-		tail.setY(newY + center.getY());
+		tail.setX(tail.getX() + center.getX());
+		tail.setY(tail.getY() + center.getY());
 	}
 
 	@Override
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
-		head.setY(-head.getY());
-		tail.setY(-tail.getY());
+		head.reflectOverX();
+		tail.reflectOverX();
 	}
 
 	@Override
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
-		head.setX(-head.getX());
-		tail.setX(-tail.getX());
+		head.reflectOverY();
+		tail.reflectOverY();
 	}
 
 	@Override
 	public void rescaleX(double percentage) {
 		// TODO Auto-generated method stub
-		head.setX(head.getX() * percentage);
-		tail.setX(tail.getX() * percentage);
+		head.rescaleX(percentage);
+		tail.rescaleX(percentage);
 	}
 
 	@Override
 	public void rescaleY(double percentage) {
 		// TODO Auto-generated method stub
-		head.setY(head.getY() * percentage);
-		tail.setY(tail.getY() * percentage);
+		head.rescaleY(percentage);
+		tail.rescaleY(percentage);
 	}
 
 	@Override
 	public void shearX(double angle) {
 		// TODO Auto-generated method stub
-		return;
+		head.shearX(angle);
+		tail.shearX(angle);
 	}
 
 	@Override
 	public void shearY(double angle) {
 		// TODO Auto-generated method stub
-		return;
+		head.shearY(angle);
+		tail.shearY(angle);
 	}
 }

@@ -2,85 +2,142 @@ package model;
 
 public class Point extends GraphicObject{
 
-	private double x;
-	private double y;
+	private double coordinates[][];
 
 	public Point(double x, double y) {
-		this.x = x;
-		this.y = y;
+		coordinates = new double[3][1];
+		coordinates[0][0] = x;
+		coordinates[1][0] = y;
+		coordinates[2][0] = 1;
 	}
 
 	public double getX() {
-		return x;
+		return coordinates[0][0];
 	}
 
 	public double getY() {
-		return y;
+		return coordinates[1][0];
 	}
 
 	public void setX(double x) {
-		this.x = x;
+		coordinates[0][0] = x;
 	}
 
 	public void setY(double y) {
-		this.y = y;
+		coordinates[1][0] = y;
 	}
 
 	public String toString() {
-		return "(" + x + "," + y + ")";
+		return "(" + coordinates[0][0] + "," + coordinates[1][0] + ")";
 	}
 
 	@Override
 	public void translate(int height, int width) {
 		// TODO Auto-generated method stub
-		x += width;
-		y += height;
+		double[][] translationMatrix = new double[coordinates.length][coordinates.length];
+		for(int i = 0; i < translationMatrix.length; i++) {
+			for(int j = 0; j < translationMatrix[i].length; j++) {
+				if(i == j) {
+					translationMatrix[i][j] = 1;
+				}
+			}
+		}
+		
+		for(int i = 0; i < coordinates.length; i++) {
+			if(i == 0) {
+				translationMatrix[i][coordinates.length-1] = width;
+			} else {
+				translationMatrix[i][coordinates.length-1] = height;
+			}
+		}
+		
+		coordinates = Matrix.multiply(translationMatrix, coordinates);
 	}
 
 	@Override
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
-		double newX = x * Math.cos(angle) - y * Math.sin(angle);
-		double newY = x * Math.sin(angle) + y * Math.cos(angle);
-		
-		x = newX;
-		y = newY;
+		double rotationMatrix[][] = {{Math.cos(angle), -Math.sin(angle)}, 
+									{Math.sin(angle), Math.cos(angle)}};
+		coordinates = Matrix.multiply(rotationMatrix, coordinates);
 	}
 
 	@Override
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
-		y = -y;
+		setY(-getY());
 	}
 
 	@Override
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
-		x = -x;
+		setX(-getX());
 	}
 
 	@Override
 	public void rescaleX(double percentage) {
 		// TODO Auto-generated method stub
-		return;
+		double rescalingMatrix[][] = new double[coordinates.length][coordinates.length];
+		
+		for(int i = 0; i < rescalingMatrix.length; i++) {
+			for(int j = 0; j < rescalingMatrix[i].length; j++) {
+				if(i == j) {
+					rescalingMatrix[i][j] = 1;
+				}
+			}
+		}
+		
+		rescalingMatrix[0][0] = percentage;
+		coordinates = Matrix.multiply(rescalingMatrix, coordinates);
 	}
 
 	@Override
 	public void rescaleY(double percentage) {
 		// TODO Auto-generated method stub
-		return;
+		double rescalingMatrix[][] = new double[coordinates.length][coordinates.length];
+		
+		for(int i = 0; i < rescalingMatrix.length; i++) {
+			for(int j = 0; j < rescalingMatrix[i].length; j++) {
+				if(i == j) {
+					rescalingMatrix[i][j] = 1;
+				}
+			}
+		}
+		
+		rescalingMatrix[1][1] = percentage;
+		coordinates = Matrix.multiply(rescalingMatrix, coordinates);
 	}
 
 	@Override
 	public void shearX(double angle) {
 		// TODO Auto-generated method stub
-		return;
+		double shearingMatrix[][] = new double[coordinates.length][coordinates.length];
+		for(int i = 0; i < shearingMatrix.length; i++) {
+			for(int j = 0; j < shearingMatrix[i].length; j++) {
+				if(i == j) {
+					shearingMatrix[i][j] = 1;
+				}
+			}
+		}
+		
+		shearingMatrix[0][1] = Math.tan(angle);
+		coordinates = Matrix.multiply(shearingMatrix, coordinates);
 	}
 
 	@Override
 	public void shearY(double angle) {
 		// TODO Auto-generated method stub
-		return;
+		double shearingMatrix[][] = new double[coordinates.length][coordinates.length];
+		for(int i = 0; i < shearingMatrix.length; i++) {
+			for(int j = 0; j < shearingMatrix[i].length; j++) {
+				if(i == j) {
+					shearingMatrix[i][j] = 1;
+				}
+			}
+		}
+		
+		shearingMatrix[1][0] = Math.tan(angle);
+		coordinates = Matrix.multiply(shearingMatrix, coordinates);
 	}
 
 }

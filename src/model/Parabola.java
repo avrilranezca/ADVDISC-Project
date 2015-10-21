@@ -5,17 +5,17 @@ public class Parabola extends GraphicObject{
 	private Point vertex;
 	private Point focus;
 	private double focalLength;
-	private String direction;
-	private ConicMatrix matrix;
+	private int direction;
+	//private ConicMatrix matrix;
 		
-	public Parabola(Point vertex, Point focus, double focalLength, String direction) {
+	public Parabola(Point vertex, Point focus, double focalLength, int direction) {
 		super();
 		this.vertex = vertex;
 		this.focus = focus;
 		this.focalLength = focalLength;
 		this.direction = direction;
-		matrix = new ConicMatrix();
-		convertToMatrix();
+		//matrix = new ConicMatrix();
+		//convertToMatrix();
 	}
 
 	public Point getVertex() {
@@ -42,15 +42,15 @@ public class Parabola extends GraphicObject{
 		this.focalLength = focalLength;
 	}
 	
-	public String getDirection() {
+	public int getDirection() {
 		return direction;
 	}
 	
-	public void setDirection(String direction) {
+	public void setDirection(int direction) {
 		this.direction = direction;
 	}
 
-	public void convertToMatrix()
+	/*public void convertToMatrix()
 	{
 		if(direction.equals("vertical"))
 		{
@@ -63,17 +63,14 @@ public class Parabola extends GraphicObject{
 		}
 		
 		//System.out.println(matrix);
-	}
+	}*/
 
 	@Override
 	public void translate(int height, int width) {
 		// TODO Auto-generated method stub
 		
-		vertex.setX(vertex.getX() + width);
-		vertex.setY(vertex.getY() + height);
-		
-		focus.setX(focus.getX() + width);
-		focus.setY(focus.getY() + height);
+		vertex.translate(height, width);
+		focus.translate(height, width);
 	}
 
 	@Override
@@ -94,43 +91,54 @@ public class Parabola extends GraphicObject{
 			{
 				/* Opens upwards */
 				if(vertex.getX() == focus.getX() && vertex.getY() < focus.getY()) {
-					double temp = vertex.getX();
+					/*double temp = vertex.getX();
 					vertex.setX(vertex.getY());
 					vertex.setY(-temp);
 					
 					temp = focus.getX();
 					focus.setX(focus.getY());
-					vertex.setY(-temp);
+					vertex.setY(-temp);*/
+					
+					focus.rotate(90);
+					direction = 1;
 				}
 				/* Opens downwards */
 				else if(vertex.getX() == focus.getX() && vertex.getY() > focus.getY()) {
-					double temp = vertex.getX();
+					/*double temp = vertex.getX();
 					vertex.setX(-vertex.getY());
 					vertex.setY(temp);
 					
 					temp = focus.getX();
 					focus.setX(-focus.getY());
-					focus.setY(temp);
+					focus.setY(temp);*/
+					focus.rotate(90);
+					direction = 2;
 				}
 				/* Opens to the right */
 				else if(vertex.getY() == focus.getY() && vertex.getX() < focus.getX()) {
-					double temp = vertex.getX();
+					/*double temp = vertex.getX();
 					vertex.setX(-vertex.getY());
 					vertex.setY(temp);
 					
 					temp = focus.getX();
 					focus.setX(-focus.getY());
-					focus.setY(temp);
+					focus.setY(temp);*/
+					
+					focus.rotate(90);
+					direction = 4;
 				}
 				/* Opens to the left */
 				else if(vertex.getY() == focus.getY() && vertex.getX() > focus.getY()) {
-					double temp = vertex.getX();
+					/*double temp = vertex.getX();
 					vertex.setX(-vertex.getY());
 					vertex.setY(temp);
 					
 					temp = focus.getX();
 					focus.setX(-focus.getY());
-					focus.setY(temp);
+					focus.setY(temp);*/
+					
+					focus.rotate(90);
+					direction = 3;
 				}
 				
 				angle -= 90;
@@ -143,44 +151,54 @@ public class Parabola extends GraphicObject{
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
 		
-		vertex.setY(-vertex.getY());
-		focus.setY(-focus.getY());
+		/*vertex.setY(-vertex.getY());
+		focus.setY(-focus.getY());*/
 		
 		/*directrixValue = -directrixValue;*/
+		
+		vertex.reflectOverX();
+		focus.reflectOverX();
 	}
 
 	@Override
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
 		
-		vertex.setX(-vertex.getX());
-		focus.setY(-vertex.getY());
+		/*vertex.setX(-vertex.getX());
+		focus.setY(-vertex.getY());*/
 		
 		/*directrixValue = -directrixValue;*/
+		
+		vertex.reflectOverY();
+		focus.reflectOverY();
 	}
 
 	@Override
 	public void rescaleX(double percentage) {
 		// TODO Auto-generated method stub
 		
+		focalLength *= percentage;
 	}
 
 	@Override
 	public void rescaleY(double percentage) {
 		// TODO Auto-generated method stub
 		
+		focalLength *= percentage;
 	}
 
 	@Override
 	public void shearX(double angle) {
 		// TODO Auto-generated method stub
 		
+		/* POSIBLE BA ITO */
 	}
 
 	@Override
 	public void shearY(double angle) {
 		// TODO Auto-generated method stub
 		
+		/* POSIBLE BA ITO */
 	}
 
 }

@@ -12,8 +12,7 @@ public class Polygon extends GraphicObject{
 	public void translate(int height, int width) {
 		// TODO Auto-generated method stub
 		for(Point point : points) {
-			point.setX(point.getX() + width);
-			point.setY(point.getY() + height);
+			point.translate(height, width);
 		}
 	}
 
@@ -69,7 +68,7 @@ public class Polygon extends GraphicObject{
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
 		for(Point point : points) {
-			point.setY(-point.getY());
+			point.reflectOverX();
 		}
 	}
 
@@ -77,7 +76,7 @@ public class Polygon extends GraphicObject{
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
 		for(Point point : points) {
-			point.setX(-point.getX());
+			point.reflectOverY();
 		}
 	}
 
@@ -118,7 +117,7 @@ public class Polygon extends GraphicObject{
 		
 		for(Point point : points) {
 			if(point.getY() > minY) {
-				point.setX(point.getX() + Math.tan(angle) * point.getY());
+				point.shearX(angle);
 			}
 		}
 	}
@@ -135,7 +134,7 @@ public class Polygon extends GraphicObject{
 		}
 		for(Point point : points) {
 			if(point.getX() > minX) {
-				point.setY(point.getY() + Math.tan(angle) * point.getX());
+				point.shearY(angle);
 			}
 		}
 	}
