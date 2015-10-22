@@ -99,7 +99,6 @@ public class Parabola extends GraphicObject{
 					focus.setX(focus.getY());
 					vertex.setY(-temp);*/
 					
-					focus.rotate(90);
 					direction = 1;
 				}
 				/* Opens downwards */
@@ -111,7 +110,7 @@ public class Parabola extends GraphicObject{
 					temp = focus.getX();
 					focus.setX(-focus.getY());
 					focus.setY(temp);*/
-					focus.rotate(90);
+					
 					direction = 2;
 				}
 				/* Opens to the right */
@@ -124,7 +123,6 @@ public class Parabola extends GraphicObject{
 					focus.setX(-focus.getY());
 					focus.setY(temp);*/
 					
-					focus.rotate(90);
 					direction = 4;
 				}
 				/* Opens to the left */
@@ -137,9 +135,11 @@ public class Parabola extends GraphicObject{
 					focus.setX(-focus.getY());
 					focus.setY(temp);*/
 					
-					focus.rotate(90);
 					direction = 3;
 				}
+				
+				vertex.rotate(90);
+				focus.rotate(90);
 				
 				angle -= 90;
 			}

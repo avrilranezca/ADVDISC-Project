@@ -57,6 +57,7 @@ public class Point extends GraphicObject{
 	@Override
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
+		angle = Math.toRadians(angle);
 		double rotationMatrix[][] = {{Math.cos(angle), -Math.sin(angle)}, 
 									{Math.sin(angle), Math.cos(angle)}};
 		coordinates = Matrix.multiply(rotationMatrix, coordinates);

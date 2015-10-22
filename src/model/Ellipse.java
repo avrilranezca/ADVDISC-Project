@@ -15,8 +15,7 @@ public class Ellipse extends GraphicObject{
 	@Override
 	public void translate(int height, int width) {
 		// TODO Auto-generated method stub
-		center.setX(center.getX() + width);
-		center.setY(center.getY() + height);
+		center.translate(height, width);
 	}
 
 	@Override
@@ -42,13 +41,13 @@ public class Ellipse extends GraphicObject{
 	@Override
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
-		center.setY(-center.getY());
+		center.reflectOverY();
 	}
 
 	@Override
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
-		center.setY(-center.getX());
+		center.reflectOverX();
 	}
 
 	@Override
