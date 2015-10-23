@@ -164,6 +164,37 @@ public class OptionsPanel extends JPanel {
 			buttonDelete.addActionListener(new editListener(panelInput, MainView.EDIT_DELETE));
 	}
 	
+// ERROR CHECKING
+	
+	private boolean isValid(String input){
+		try{
+		  Double.parseDouble(input);
+		}
+		catch(NumberFormatException e){
+		  return false;
+		}
+		return true;
+	}
+	
+	private boolean isPositive(String input){
+		System.out.println("isPositive");
+		System.out.println("> input: " + input);
+		if(isValid(input)){
+			System.out.println("> Double.parseDouble(input): " + Double.parseDouble(input));
+			if(Double.parseDouble(input) > 0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void displayError(){
+		panelInput.removeAll();
+		panelInput.add(new errorPanel(panelInput));
+		repaint();
+		revalidate();
+	}
+	
 // INPUT PANELS (ADDING)
 	
 	private class addPointPanel extends JPanel {
@@ -182,9 +213,13 @@ public class OptionsPanel extends JPanel {
 				flow2.add(field2);
 				this.add(flow2);
 				
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			buttonAdd = new JButton("Add Point");
-			buttonAdd.addActionListener(new finalAddPointListener());
-			this.add(buttonAdd);
+				buttonAdd.addActionListener(new finalAddPointListener());
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -215,10 +250,14 @@ public class OptionsPanel extends JPanel {
 				field4 = new JTextField(5);
 				flow4.add(field4);
 				this.add(flow4);
+			
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
 				
 			buttonAdd = new JButton("Add Line");
-			buttonAdd.addActionListener(new finalAddLineListener());
-			this.add(buttonAdd);
+				buttonAdd.addActionListener(new finalAddLineListener());
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -249,10 +288,14 @@ public class OptionsPanel extends JPanel {
 				field4 = new JTextField(5);
 				flow4.add(field4);
 				this.add(flow4);
+			
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
 				
 			buttonAdd = new JButton("Add Ellipse");
-			buttonAdd.addActionListener(new finalAddEllipseListener());
-			this.add(buttonAdd);
+				buttonAdd.addActionListener(new finalAddEllipseListener());
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -283,9 +326,13 @@ public class OptionsPanel extends JPanel {
 				flow3.add(field2);
 				this.add(flow3);
 				
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			JButton buttonAddPoint = new JButton("Add Point");
-			buttonAddPoint.addActionListener(new addPolygonPoints(this));
-			this.add(buttonAddPoint);
+				buttonAddPoint.addActionListener(new addPolygonPoints(this));
+				this.add(buttonAddPoint);
 		}
 		
 		private class addPolygonPoints implements ActionListener {
@@ -296,20 +343,30 @@ public class OptionsPanel extends JPanel {
 			}
 			
 			public void actionPerformed(ActionEvent e) {
-				polygonXCoords.add(Integer.parseInt(field1.getText()));
-				polygonYCoords.add(Integer.parseInt(field2.getText()));
+				String val1 = field1.getText();
+				String val2 = field2.getText();
 				
-				field1.setText("");
-				field2.setText("");
-				
-				pointLabel.setText("Point " + (polygonXCoords.size() + 1));
-				
-				if(polygonXCoords.size() == 3){
-					buttonAdd = new JButton("Add Polygon");
-					buttonAdd.addActionListener(new finalAddPolygonListener());
-					parentContainer.add(buttonAdd);
-					repaint();
-					revalidate();
+				if(OptionsPanel.this.isValid(val1)
+					&& OptionsPanel.this.isValid(val2)){
+					
+					polygonXCoords.add(Integer.parseInt(val1));
+					polygonYCoords.add(Integer.parseInt(val2));
+					
+					field1.setText("");
+					field2.setText("");
+					
+					pointLabel.setText("Point " + (polygonXCoords.size() + 1));
+					
+					if(polygonXCoords.size() == 3){
+						buttonAdd = new JButton("Add Polygon");
+						buttonAdd.addActionListener(new finalAddPolygonListener());
+						parentContainer.add(buttonAdd);
+						repaint();
+						revalidate();
+					}
+				}
+				else{
+					displayError();
 				}
 			}
 		}
@@ -350,9 +407,13 @@ public class OptionsPanel extends JPanel {
 				flow5.add(dropdown);
 				this.add(flow5);
 				
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			buttonAdd = new JButton("Add Parabola");
-			buttonAdd.addActionListener(new finalAddParabolaListener());
-			this.add(buttonAdd);
+				buttonAdd.addActionListener(new finalAddParabolaListener());
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -395,9 +456,13 @@ public class OptionsPanel extends JPanel {
 				flow6.add(dropdown);
 				this.add(flow6);
 				
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			buttonAdd = new JButton("Add Hyperbola");
-			buttonAdd.addActionListener(new finalAddHyperbolaListener());
-			this.add(buttonAdd);
+				buttonAdd.addActionListener(new finalAddHyperbolaListener());
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -419,15 +484,14 @@ public class OptionsPanel extends JPanel {
 				flow2.add(field2);
 				this.add(flow2);
 				
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			buttonAdd = new addButton("Translate",
 									  view.getObject(view.getSelectedObject()),
 									  updatePanel);
-			
-			buttonCancel = new JButton("Cancel");
-			buttonCancel.addActionListener(new cancelListener(this));
-			this.add(buttonCancel);
-			
-			this.add(buttonAdd);
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -465,15 +529,14 @@ public class OptionsPanel extends JPanel {
 				
 			}
 			
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			buttonAdd = new addButton("Rotate",
 									  view.getObject(view.getSelectedObject()),
 									  updatePanel);
-			
-			buttonCancel = new JButton("Cancel");
-			buttonCancel.addActionListener(new cancelListener(this));
-			this.add(buttonCancel);
-			
-			this.add(buttonAdd);
+				this.add(buttonAdd);
 		}
 	}
 	
@@ -492,13 +555,14 @@ public class OptionsPanel extends JPanel {
 					flow1.add(field1);
 					this.add(flow1);
 				
-				buttonAdd = new addButton("Shear",
-						  view.getObject(view.getSelectedObject()),
-						  updatePanel);
-				
 				buttonCancel = new JButton("Cancel");
 					buttonCancel.addActionListener(new cancelListener(this));
 					this.add(buttonCancel);
+					
+				buttonAdd = new addButton("Shear",
+						  view.getObject(view.getSelectedObject()),
+						  updatePanel);
+					this.add(buttonAdd);
 			}
 			
 			else if(currObj instanceof PointDrawer
@@ -510,12 +574,10 @@ public class OptionsPanel extends JPanel {
 					flow1.add(new JLabel("This object cannot be sheared"));
 					this.add(flow1);
 				
-				buttonAdd = new addButton("Continue",
-						  view.getObject(view.getSelectedObject()),
-						  updatePanel);
+				buttonCancel = new JButton("Continue");
+					buttonCancel.addActionListener(new cancelListener(this));
+					this.add(buttonCancel);
 			}
-				
-			this.add(buttonAdd);
 			
 		}
 	}
@@ -531,9 +593,9 @@ public class OptionsPanel extends JPanel {
 				flow1.add(new JLabel("This object cannot be scaled"));
 				this.add(flow1);
 			
-				buttonAdd = new addButton("Continue",
-						  view.getObject(view.getSelectedObject()),
-						  updatePanel);
+				buttonCancel = new JButton("Continue");
+					buttonCancel.addActionListener(new cancelListener(this));
+					this.add(buttonCancel);
 			}
 			else{
 				JPanel flow1 = new JPanel();
@@ -542,16 +604,17 @@ public class OptionsPanel extends JPanel {
 					flow1.add(field1);
 					this.add(flow1);
 				
-				buttonAdd = new addButton("Scale",
-										  view.getObject(view.getSelectedObject()),
-										  updatePanel);
-				
 				buttonCancel = new JButton("Cancel");
 					buttonCancel.addActionListener(new cancelListener(this));
 					this.add(buttonCancel);
+					
+				buttonAdd = new addButton("Scale",
+						  view.getObject(view.getSelectedObject()),
+						  updatePanel);
+					this.add(buttonAdd);
 			}
 				
-			this.add(buttonAdd);
+			
 			
 		}
 	}
@@ -573,12 +636,11 @@ public class OptionsPanel extends JPanel {
 			buttonAdd = new addButton("Reflect",
 									  view.getObject(view.getSelectedObject()),
 									  updatePanel);
+				this.add(buttonAdd);
 			
 			buttonCancel = new JButton("Cancel");
 				buttonCancel.addActionListener(new cancelListener(this));
 				this.add(buttonCancel);
-				
-			this.add(buttonAdd);
 		}
 	}
 	
@@ -682,6 +744,23 @@ public class OptionsPanel extends JPanel {
 			buttonAdd = new JButton("Apply");
 			buttonAdd.addActionListener(new applyEditListener(updatePanel));
 			this.add(buttonAdd);
+		}
+	}
+	
+// ERROR PANEL
+	
+	private class errorPanel extends JPanel {
+		public errorPanel(JPanel updatePanel){
+			System.out.println("errorPanel (Constructor)");
+			this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+			
+			JPanel flow1 = new JPanel();
+				flow1.add(new JLabel("Invalid Input"));
+				this.add(flow1);
+			
+			buttonCancel = new JButton("Continue");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
 		}
 	}
 	
@@ -810,10 +889,18 @@ public class OptionsPanel extends JPanel {
 	private class finalAddPointListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(editing == 0){
-				int x = Integer.parseInt(field1.getText());
-				int y = Integer.parseInt(field2.getText());
-				if(Controller.addPoint(x, y)){
-					view.addPoint(x, y);
+				String val1 = field1.getText();
+				String val2 = field2.getText();
+				
+				if(isValid(val1) && isValid(val2)){
+					int x = Integer.parseInt(val1);
+					int y = Integer.parseInt(val2);
+					if(Controller.addPoint(x, y)){
+						view.addPoint(x, y);
+					}
+				}
+				else{
+					displayError();
 				}
 			}
 		}
@@ -822,13 +909,26 @@ public class OptionsPanel extends JPanel {
 	private class finalAddLineListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(editing == 0){
-				int x1 = Integer.parseInt(field1.getText());
-				int y1 = Integer.parseInt(field2.getText());
-				int x2 = Integer.parseInt(field3.getText());
-				int y2 = Integer.parseInt(field4.getText());
-				if(Controller.addLine(x1, y1, x2, y2)){
-					view.addLine(x1, y1, x2, y2);
+				String val1 = field1.getText();
+				String val2 = field2.getText();
+				String val3 = field3.getText();
+				String val4 = field4.getText();
+				
+				if(isValid(val1) && isValid(val2)
+					&& isValid(val3) && isValid(val4)){
+					int x1 = Integer.parseInt(val1);
+					int y1 = Integer.parseInt(val2);
+					int x2 = Integer.parseInt(val3);
+					int y2 = Integer.parseInt(val4);
+					
+					if(Controller.addLine(x1, y1, x2, y2)){
+						view.addLine(x1, y1, x2, y2);
+					}
 				}
+				else{
+					displayError();
+				}
+				
 			}
 		}
 	}
@@ -836,12 +936,24 @@ public class OptionsPanel extends JPanel {
 	private class finalAddEllipseListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(editing == 0){
-				int x = Integer.parseInt(field1.getText());
-				int y = Integer.parseInt(field2.getText());
-				int w = Integer.parseInt(field3.getText());
-				int h = Integer.parseInt(field4.getText());
-				if(Controller.addEllipse(x, y, w, h)){
-					view.addEllipse(x, y, w, h);
+				String val1 = field1.getText();
+				String val2 = field2.getText();
+				String val3 = field3.getText();
+				String val4 = field4.getText();
+				
+				if(isValid(val1) && isValid(val2)
+					&& isPositive(val3) && isPositive(val4)){
+					int x = Integer.parseInt(val1);
+					int y = Integer.parseInt(val2);
+					int w = Integer.parseInt(val3);
+					int h = Integer.parseInt(val4);
+					
+					if(Controller.addEllipse(x, y, w, h)){
+						view.addEllipse(x, y, w, h);
+					}
+				}
+				else{
+					displayError();
 				}
 			}
 		}
@@ -867,14 +979,26 @@ public class OptionsPanel extends JPanel {
 	private class finalAddParabolaListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(editing == 0){
-				int x = Integer.parseInt(field1.getText());
-				int y = Integer.parseInt(field2.getText());
-				int f = Integer.parseInt(field3.getText());
-				int d = dropdown.getSelectedIndex() + 1;
+				String val1 = field1.getText();
+				String val2 = field2.getText();
+				String val3 = field3.getText();
 				
-				if(Controller.addParabola(x, y, f, d)){
-					view.addParabola(x, y, f, d);
+				if(isValid(val1) && isValid(val2)
+					&& isPositive(val3)){
+					
+					int x = Integer.parseInt(val1);
+					int y = Integer.parseInt(val2);
+					int f = Integer.parseInt(val3);
+					int d = dropdown.getSelectedIndex() + 1;
+					
+					if(Controller.addParabola(x, y, f, d)){
+						view.addParabola(x, y, f, d);
+					}
 				}
+				else{
+					displayError();
+				}
+				
 			}
 		}
 	}
@@ -882,14 +1006,28 @@ public class OptionsPanel extends JPanel {
 	private class finalAddHyperbolaListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(editing == 0){
-				int x  = Integer.parseInt(field1.getText());
-				int y  = Integer.parseInt(field2.getText());
-				int xd = Integer.parseInt(field3.getText());
-				int yd = Integer.parseInt(field4.getText());
-				int d  = dropdown.getSelectedIndex() + 1;
-				if(Controller.addHyperbola(x, y, xd, yd, d)){
-					view.addHyperbola(x, y, xd, yd, d);
+				String val1 = field1.getText();
+				String val2 = field2.getText();
+				String val3 = field3.getText();
+				String val4 = field4.getText();
+				
+				if(isValid(val1) && isValid(val2)
+					&& isPositive(val3) && isPositive(val4)){
+					
+					int x  = Integer.parseInt(val1);
+					int y  = Integer.parseInt(val2);
+					int xd = Integer.parseInt(val3);
+					int yd = Integer.parseInt(val4);
+					int d  = dropdown.getSelectedIndex() + 1;
+					
+					if(Controller.addHyperbola(x, y, xd, yd, d)){
+						view.addHyperbola(x, y, xd, yd, d);
+					}
 				}
+				else{
+					displayError();
+				}
+				
 			}
 		}
 	}
@@ -959,10 +1097,15 @@ public class OptionsPanel extends JPanel {
 			double[][] data = null;
 			
 			if(editing == MainView.EDIT_TRANSLATE){
-				double x = Double.parseDouble(field1.getText());
-				double y = Double.parseDouble(field2.getText());
+				String val1 = field1.getText();
+				String val2 = field1.getText();
 				
-				data = Controller.translateObject(currentlyEditing, x, y);
+				if(isValid(val1) && isValid(val2)){
+					double x = Double.parseDouble(val1);
+					double y = Double.parseDouble(val2);
+					
+					data = Controller.translateObject(currentlyEditing, x, y);
+				}
 			}
 			
 			else if(editing == MainView.EDIT_ROTATE){
@@ -971,7 +1114,13 @@ public class OptionsPanel extends JPanel {
 				if(o instanceof PointDrawer
 					|| o instanceof LineDrawer
 					|| o instanceof PolygonDrawer){
-					d = Double.parseDouble(field1.getText());
+					
+					String val = field1.getText();
+					
+					if(isValid(val)){
+						d = Double.parseDouble(val);
+						data = Controller.rotateObject(currentlyEditing, d);
+					}
 				}
 				
 				else{
@@ -986,9 +1135,11 @@ public class OptionsPanel extends JPanel {
 					else{
 						d = 270;
 					}
+					
+					data = Controller.rotateObject(currentlyEditing, d);
 				}
 				
-				data = Controller.rotateObject(currentlyEditing, d);
+				
 			}
 			
 			else if(editing == MainView.EDIT_SHEAR){
@@ -997,15 +1148,24 @@ public class OptionsPanel extends JPanel {
 				if(o instanceof PointDrawer
 					|| o instanceof LineDrawer
 					|| o instanceof PolygonDrawer){
-					d = Double.parseDouble(field1.getText());
-					data = Controller.shearObject(currentlyEditing, d);
+					String val = field1.getText();
+					
+					if(isValid(val)){
+						d = Double.parseDouble(field1.getText());
+						data = Controller.shearObject(currentlyEditing, d);
+					}
 				}
 			}
 			
 			else if(editing == MainView.EDIT_SCALE){
-				double value = Double.parseDouble(field1.getText());
+				double d = 0;
 				
-				data = Controller.scaleObject(currentlyEditing, value);
+				String val = field1.getText();
+				
+				if(isValid(val)){
+					d = Double.parseDouble(field1.getText());
+					data = Controller.scaleObject(currentlyEditing, d);
+				}
 			}
 			
 			else if(editing == MainView.EDIT_REFLECT){
@@ -1021,7 +1181,7 @@ public class OptionsPanel extends JPanel {
 				
 			}
 			else{
-				updatePanel.removeAll();
+				displayError();
 			}
 			editing = 0;
 			repaint();
