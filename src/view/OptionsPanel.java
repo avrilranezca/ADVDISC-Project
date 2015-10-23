@@ -47,6 +47,7 @@ public class OptionsPanel extends JPanel {
 	JTextField   field4;
 	JComboBox    dropdown;
 	JButton      buttonAdd;
+	JButton		 buttonCancel;
 	
 	JPanel  panelInput;
 	
@@ -421,6 +422,11 @@ public class OptionsPanel extends JPanel {
 			buttonAdd = new addButton("Translate",
 									  view.getObject(view.getSelectedObject()),
 									  updatePanel);
+			
+			buttonCancel = new JButton("Cancel");
+			buttonCancel.addActionListener(new cancelListener(this));
+			this.add(buttonCancel);
+			
 			this.add(buttonAdd);
 		}
 	}
@@ -462,6 +468,11 @@ public class OptionsPanel extends JPanel {
 			buttonAdd = new addButton("Rotate",
 									  view.getObject(view.getSelectedObject()),
 									  updatePanel);
+			
+			buttonCancel = new JButton("Cancel");
+			buttonCancel.addActionListener(new cancelListener(this));
+			this.add(buttonCancel);
+			
 			this.add(buttonAdd);
 		}
 	}
@@ -472,8 +483,7 @@ public class OptionsPanel extends JPanel {
 			
 			GraphicObject currObj = view.getObject(view.getSelectedObject());
 			
-			if(currObj instanceof PointDrawer
-				|| currObj instanceof LineDrawer
+			if(currObj instanceof LineDrawer
 				|| currObj instanceof PolygonDrawer){
 					
 				JPanel flow1 = new JPanel();
@@ -485,9 +495,14 @@ public class OptionsPanel extends JPanel {
 				buttonAdd = new addButton("Shear",
 						  view.getObject(view.getSelectedObject()),
 						  updatePanel);
+				
+				buttonCancel = new JButton("Cancel");
+					buttonCancel.addActionListener(new cancelListener(this));
+					this.add(buttonCancel);
 			}
 			
-			else if(currObj instanceof EllipseDrawer
+			else if(currObj instanceof PointDrawer
+					|| currObj instanceof EllipseDrawer
 					|| currObj instanceof ParabolaDrawer
 					|| currObj instanceof HyperbolaDrawer){
 				
@@ -499,9 +514,9 @@ public class OptionsPanel extends JPanel {
 						  view.getObject(view.getSelectedObject()),
 						  updatePanel);
 			}
-			
-			
+				
 			this.add(buttonAdd);
+			
 		}
 	}
 	
@@ -511,16 +526,33 @@ public class OptionsPanel extends JPanel {
 			
 			GraphicObject currObj = view.getObject(view.getSelectedObject());
 			
-			JPanel flow1 = new JPanel();
-				flow1.add(new JLabel("Scale Value"));
-				field1 = new JTextField(5);
-				flow1.add(field1);
+			if(currObj instanceof PointDrawer){
+				JPanel flow1 = new JPanel();
+				flow1.add(new JLabel("This object cannot be scaled"));
 				this.add(flow1);
 			
-			buttonAdd = new addButton("Scale",
-									  view.getObject(view.getSelectedObject()),
-									  updatePanel);
+				buttonAdd = new addButton("Continue",
+						  view.getObject(view.getSelectedObject()),
+						  updatePanel);
+			}
+			else{
+				JPanel flow1 = new JPanel();
+					flow1.add(new JLabel("Scale Value"));
+					field1 = new JTextField(5);
+					flow1.add(field1);
+					this.add(flow1);
+				
+				buttonAdd = new addButton("Scale",
+										  view.getObject(view.getSelectedObject()),
+										  updatePanel);
+				
+				buttonCancel = new JButton("Cancel");
+					buttonCancel.addActionListener(new cancelListener(this));
+					this.add(buttonCancel);
+			}
+				
 			this.add(buttonAdd);
+			
 		}
 	}
 	
@@ -541,6 +573,11 @@ public class OptionsPanel extends JPanel {
 			buttonAdd = new addButton("Reflect",
 									  view.getObject(view.getSelectedObject()),
 									  updatePanel);
+			
+			buttonCancel = new JButton("Cancel");
+				buttonCancel.addActionListener(new cancelListener(this));
+				this.add(buttonCancel);
+				
 			this.add(buttonAdd);
 		}
 	}
@@ -869,35 +906,37 @@ public class OptionsPanel extends JPanel {
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("editListener: editType = " + editType);
-			if(editing == 0 ){
-				editing = editType;
-				currentlyEditing = view.getSelectedObject();
-				previousObject = view.getObject(currentlyEditing);
-				updatePanel.removeAll();
-				
-				if(editType == MainView.EDIT_TRANSLATE){
-					updatePanel.add(new translatePanel(updatePanel));
+			if(view.getObjectCount() > 0){
+				System.out.println("editListener: editType = " + editType);
+				if(editing == 0 ){
+					editing = editType;
+					currentlyEditing = view.getSelectedObject();
+					previousObject = view.getObject(currentlyEditing);
+					updatePanel.removeAll();
+					
+					if(editType == MainView.EDIT_TRANSLATE){
+						updatePanel.add(new translatePanel(updatePanel));
+					}
+					else if(editType == MainView.EDIT_ROTATE){
+						updatePanel.add(new rotatePanel(updatePanel));
+					}
+					else if(editType == MainView.EDIT_SHEAR){
+						updatePanel.add(new shearPanel(updatePanel));
+					}
+					else if(editType == MainView.EDIT_SCALE){
+						updatePanel.add(new scalePanel(updatePanel));
+					}
+					else if(editType == MainView.EDIT_REFLECT){
+						updatePanel.add(new reflectPanel(updatePanel));
+					}
+					else if(editType == MainView.EDIT_DELETE){
+						//Controller.deleteObject(currentlyEditing);
+						//NOTE TO CLARISSE: FINISH THIS
+					}
+					
+					repaint();
+					revalidate();
 				}
-				else if(editType == MainView.EDIT_ROTATE){
-					updatePanel.add(new rotatePanel(updatePanel));
-				}
-				else if(editType == MainView.EDIT_SHEAR){
-					updatePanel.add(new shearPanel(updatePanel));
-				}
-				else if(editType == MainView.EDIT_SCALE){
-					updatePanel.add(new scalePanel(updatePanel));
-				}
-				else if(editType == MainView.EDIT_REFLECT){
-					updatePanel.add(new reflectPanel(updatePanel));
-				}
-				else if(editType == MainView.EDIT_DELETE){
-					//Controller.deleteObject(currentlyEditing);
-					//NOTE TO CLARISSE: FINISH THIS
-				}
-				
-				repaint();
-				revalidate();
 			}
 		}
 	}
@@ -1004,4 +1043,20 @@ public class OptionsPanel extends JPanel {
 		}
 	}
 	
+// CANCEL LISTENER
+	
+	private class cancelListener implements ActionListener {
+		JPanel updatePanel;
+		
+		public cancelListener(JPanel u){
+			updatePanel = u;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			updatePanel.removeAll();
+			editing = 0;
+			repaint();
+			revalidate();
+		}
+	}
 }
