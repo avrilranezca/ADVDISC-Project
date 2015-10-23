@@ -930,8 +930,10 @@ public class OptionsPanel extends JPanel {
 						updatePanel.add(new reflectPanel(updatePanel));
 					}
 					else if(editType == MainView.EDIT_DELETE){
-						//Controller.deleteObject(currentlyEditing);
-						//NOTE TO CLARISSE: FINISH THIS
+						if(Controller.deleteObject(currentlyEditing)){
+							view.deleteObject(currentlyEditing);
+							editing = 0;
+						}
 					}
 					
 					repaint();
@@ -996,7 +998,7 @@ public class OptionsPanel extends JPanel {
 					|| o instanceof LineDrawer
 					|| o instanceof PolygonDrawer){
 					d = Double.parseDouble(field1.getText());
-					data = Controller.rotateObject(currentlyEditing, d);
+					data = Controller.shearObject(currentlyEditing, d);
 				}
 			}
 			

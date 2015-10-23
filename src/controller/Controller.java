@@ -112,10 +112,10 @@ public class Controller {
 	
 	/* Shears object
 	 * @param index index in the list of object to be edited
-	 * NOTE: I STILL DON'T KNOW WHAT YOU NEED FOR SHEARING
+	 * @param deg   value of shearing in degrees
 	 * @return new matrix data of object*
 	 */
-	public static double[][] shearObject(int index) { // NOTE TO CLARISSE: FIX THIS
+	public static double[][] shearObject(int index, double deg) {
 		// rotate object in model
 		return editTest(index); // temporary (return null means there was an error)
 	}
@@ -138,6 +138,15 @@ public class Controller {
 	public static double[][] reflectObject(int index, int type) {
 		// rotate object in model
 		return editTest(index); // temporary (return null means there was an error)
+	}
+	
+	/* Deletes object
+	 * @param index index in the list of object to be edited
+	 * @return true if successfully deleted, false otherwise
+	 */
+	public static boolean deleteObject(int index) {
+		// if able to delete in model
+		return true; // else return false
 	}
 	
 }

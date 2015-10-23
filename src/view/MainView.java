@@ -159,6 +159,21 @@ public class MainView {
 		refreshGrid();
 	}
 	
+// DELETING OBJECTS
+	
+	public void deleteObject(int index){
+		objectList.remove(index);
+		if(selectedObject == index){
+			if(index > 0){
+				selectedObject--;
+			}
+			else{
+				selectedObject = objectList.size() - 1;
+			}
+		}
+		refreshGrid();
+	}
+	
 // GETTING CONSTANT VALUES
 	
 	public static String getPDirectionString(int d){
