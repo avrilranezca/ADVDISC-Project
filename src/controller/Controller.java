@@ -50,39 +50,85 @@ public class Controller {
 	}
 	
 // ADDING
-	
+
+	/* Adds a point
+	 * @param x x coordinate of the point
+	 * @param y y coordinate of the point
+	 * @return true if adding to model was successful, false otherwise
+	 */
 	public static boolean addPoint(double x, double y) {
 		System.out.println("Controller: addPoint (" + x + ", " + y + ")");
 		// add point to model
 		return true;
 	}
 	
+	/* Adds a line segment
+	 * @param x1 x coordinate of the first point
+	 * @param y1 y coordinate of the second point
+	 * @param x2 x coordinate of the first point
+	 * @param y2 y coordinate of the second point
+	 * @return true if adding to model was successful, false otherwise
+	 */
 	public static boolean addLine(double x1, double y1, double x2, double y2) {
-		System.out.println("Controller: addLine (" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ")");
+		System.out.println("Controller: addLine (" + x1 + ", " + y1 + ", " + x2
+							+ ", " + y2 + ")");
 		// add line to model
 		return true;
 	}
 	
+	/* Adds a ellipse
+	 * @param x x coordinate of the center
+	 * @param y y coordinate of the center
+	 * @param w width
+	 * @param h height
+	 * @return true if adding to model was successful, false otherwise
+	 */
 	public static boolean addEllipse(double x, double y, double w, double h) {
-		System.out.println("Controller: addEllipse (" + x + ", " + y + ", " + w + ", " + h + ")");
+		System.out.println("Controller: addEllipse (" + x + ", " + y + ", " + w
+							+ ", " + h + ")");
 		// add ellipse to model
 		return true;
 	}
 	
+	/* Adds a polygon
+	 * @param p array containing the points of the polygon
+	 *		  p[n][0] -> x coordinate of point n
+	 *		  p[n][1] -> y coordinate of point n
+	 * @return true if adding to model was successful, false otherwise
+	 */
 	public static boolean addPolygon(double[][] p) {
 		System.out.println("Controller: addPolygon");
 		// add polygon to model
 		return true;
 	}
 	
+	/* Adds a parabola
+	 * @param x x coordinate of the vertex
+	 * @param y y coordinate of the vertex
+	 * @param f focal length
+	 * @param d direction (MainView.PARABOLA_RIGHT || MainView.PARABOLA_LEFT
+	 						|| MainView.PARABOLA_UP || MainView.PARABOLA_DOWN)
+	 * @return true if adding to model was successful, false otherwise
+	 */
 	public static boolean addParabola(double x, double y, double f, int d) {
-		System.out.println("Controller: addParabola (" + x + ", " + y + ", " + f + ", " + d);
+		System.out.println("Controller: addParabola (" + x + ", " + y + ", " + f
+							+ ", " + d);
 		// add parabola to model
 		return true;
 	}
 	
-	public static boolean addHyperbola(double x, double y, double xd, double yd, int d) {
-		System.out.println("Controller: addHyperbola (" + x + ", " + y + ", " + xd + ", " + yd + ", " + d);
+	/* Adds a hyperbola
+	 * @param x  x coordinate of the vertex
+	 * @param y  y coordinate of the vertex
+	 * @param xd x distance
+	 * @param yd y distance
+	 * @param d  direction (MainView.HYPERBOLA_HOR || MainView.HYPERBOLA_VERT)
+	 * @return true if adding to model was successful, false otherwise
+	 */
+	public static boolean addHyperbola(double x, double y, double xd, double yd,
+									   int d) {
+		System.out.println("Controller: addHyperbola (" + x + ", " + y + ", "
+							+ xd + ", " + yd + ", " + d);
 		// add hyperbola to model
 		return true;
 	}

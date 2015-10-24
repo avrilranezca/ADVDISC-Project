@@ -21,10 +21,12 @@ import controller.Controller;
 
 public class OptionsPanel extends JPanel {
 	
+	// "Select Object" UI elements
 	JLabel  labelSelect;
 	JButton buttonPrev;
 	JButton buttonNext;
 	
+	// "Add Object" UI elements
 	JLabel  labelAdd;
 	JButton buttonPoint;
 	JButton buttonLine;
@@ -33,6 +35,7 @@ public class OptionsPanel extends JPanel {
 	JButton buttonParabola;
 	JButton buttonHyperbola;
 	
+	// "Edit Object" UI elements
 	JLabel  labelEdit;
 	JButton buttonTranslate;
 	JButton buttonRotate;
@@ -41,30 +44,32 @@ public class OptionsPanel extends JPanel {
 	JButton buttonReflect;
 	JButton buttonDelete;
 	
-	JTextField   field1;
-	JTextField   field2;
-	JTextField   field3;
-	JTextField   field4;
-	JComboBox    dropdown;
-	JButton      buttonAdd;
-	JButton		 buttonCancel;
+	// Input panel UI elements
+	JPanel  		  panelInput;
+	JTextField        field1;
+	JTextField        field2;
+	JTextField        field3;
+	JTextField        field4;
+	JComboBox<String> dropdown;
+	JButton           buttonAdd;
+	JButton		      buttonCancel;
+
+	// For adding polygons
+	ArrayList<Integer> polygonXCoords; // x coordinates of polygon being added
+	ArrayList<Integer> polygonYCoords; // y coordinates of polygon being added
 	
-	JPanel  panelInput;
+	// For track of what's being edited
+	int 		  currentlyEditing;	// index of object currently being edited
+	GraphicObject previousObject;	// data of object before editing
+	int 		  editing; 			// type of edit being done - 0 if none
 	
-	ArrayList<Integer> polygonXCoords;
-	ArrayList<Integer> polygonYCoords;
-	
-	int currentlyEditing;
-	GraphicObject previousObject;
-	
-	int editing;
-	
+	// Main view class
 	MainView   view;
 	
 	public OptionsPanel(MainView v){
-		view = v;
+		view 			 = v;
 		currentlyEditing = view.getSelectedObject();
-		editing = 0;
+		editing 		 = 0;
 		
 		this.setLayout(null);
 		
@@ -191,6 +196,14 @@ public class OptionsPanel extends JPanel {
 	private void displayError(){
 		panelInput.removeAll();
 		panelInput.add(new errorPanel(panelInput));
+		repaint();
+		revalidate();
+	}
+	
+// MISCELLANEOUS
+	
+	private void clearInputPanel(){
+		panelInput.removeAll();
 		repaint();
 		revalidate();
 	}
@@ -897,6 +910,7 @@ public class OptionsPanel extends JPanel {
 					int y = Integer.parseInt(val2);
 					if(Controller.addPoint(x, y)){
 						view.addPoint(x, y);
+						clearInputPanel();
 					}
 				}
 				else{
@@ -923,6 +937,7 @@ public class OptionsPanel extends JPanel {
 					
 					if(Controller.addLine(x1, y1, x2, y2)){
 						view.addLine(x1, y1, x2, y2);
+						clearInputPanel();
 					}
 				}
 				else{
@@ -950,6 +965,7 @@ public class OptionsPanel extends JPanel {
 					
 					if(Controller.addEllipse(x, y, w, h)){
 						view.addEllipse(x, y, w, h);
+						clearInputPanel();
 					}
 				}
 				else{
@@ -971,6 +987,13 @@ public class OptionsPanel extends JPanel {
 				
 				if(Controller.addPolygon(points)){
 					view.addPolygon(points);
+					
+					while(polygonXCoords.size() > 0){
+						polygonXCoords.remove(0);
+						polygonYCoords.remove(0);
+					}
+					
+					clearInputPanel();
 				}
 			}
 		}
@@ -993,6 +1016,7 @@ public class OptionsPanel extends JPanel {
 					
 					if(Controller.addParabola(x, y, f, d)){
 						view.addParabola(x, y, f, d);
+						clearInputPanel();
 					}
 				}
 				else{
@@ -1022,6 +1046,7 @@ public class OptionsPanel extends JPanel {
 					
 					if(Controller.addHyperbola(x, y, xd, yd, d)){
 						view.addHyperbola(x, y, xd, yd, d);
+						clearInputPanel();
 					}
 				}
 				else{
