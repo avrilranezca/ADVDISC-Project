@@ -1,8 +1,8 @@
 package model;
 
-public abstract class GraphicObject {
+public abstract class Object2D {
 	
-	public abstract void translate(int height, int width);
+	public abstract void translate(double height, double width);
 	public abstract void rotate(double angle);
 	public abstract void reflectOverX();
 	public abstract void reflectOverY();

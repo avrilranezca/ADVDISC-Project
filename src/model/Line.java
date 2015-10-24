@@ -1,6 +1,6 @@
 package model;
 
-public class Line extends GraphicObject{
+public class Line extends Object2D{
 
 	private Point head;
 	private Point tail;
@@ -27,7 +27,7 @@ public class Line extends GraphicObject{
 	}
 
 	@Override
-	public void translate(int height, int width) {
+	public void translate(double height, double width) {
 		// TODO Auto-generated method stub
 		head.translate(height, width);
 		tail.translate(height, width);

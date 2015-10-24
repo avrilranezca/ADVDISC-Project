@@ -1,15 +1,16 @@
 package controller;
 
-import view.MainFrame;
-import view.MainView;
+import model.MotherOf2DObjects;
 import view.*;
 
 public class Controller {
 
 	static MainView view;
+	static MotherOf2DObjects holder;
 	
 	public Controller(){
 		MainView view = new MainView();
+		holder = new MotherOf2DObjects();
 	}
 	
 // TEMPORARY: FOR TESTING
@@ -58,7 +59,7 @@ public class Controller {
 	 */
 	public static boolean addPoint(double x, double y) {
 		System.out.println("Controller: addPoint (" + x + ", " + y + ")");
-		// add point to model
+		holder.addPoint(x, y);
 		return true;
 	}
 	
@@ -72,7 +73,7 @@ public class Controller {
 	public static boolean addLine(double x1, double y1, double x2, double y2) {
 		System.out.println("Controller: addLine (" + x1 + ", " + y1 + ", " + x2
 							+ ", " + y2 + ")");
-		// add line to model
+		holder.addLine(x1, y1, x2, y2);
 		return true;
 	}
 	
@@ -86,7 +87,7 @@ public class Controller {
 	public static boolean addEllipse(double x, double y, double w, double h) {
 		System.out.println("Controller: addEllipse (" + x + ", " + y + ", " + w
 							+ ", " + h + ")");
-		// add ellipse to model
+		holder.addEllipse(x, y, w, h);
 		return true;
 	}
 	
@@ -98,7 +99,7 @@ public class Controller {
 	 */
 	public static boolean addPolygon(double[][] p) {
 		System.out.println("Controller: addPolygon");
-		// add polygon to model
+		holder.addPolygon(p);
 		return true;
 	}
 	
@@ -113,7 +114,7 @@ public class Controller {
 	public static boolean addParabola(double x, double y, double f, int d) {
 		System.out.println("Controller: addParabola (" + x + ", " + y + ", " + f
 							+ ", " + d);
-		// add parabola to model
+		holder.addParabola(x, y, f, d);
 		return true;
 	}
 	
@@ -129,7 +130,7 @@ public class Controller {
 									   int d) {
 		System.out.println("Controller: addHyperbola (" + x + ", " + y + ", "
 							+ xd + ", " + yd + ", " + d);
-		// add hyperbola to model
+		holder.addHyperbola(x, y, xd, yd, d);
 		return true;
 	}
 	
@@ -143,7 +144,8 @@ public class Controller {
 	 */
 	public static double[][] translateObject(int index, double x, double y) {
 		// translate object in model
-		return editTest(index); // temporary (return null means there was an error)
+		holder.getObject(index).translate(y, x);
+		return holder.getObjectArray(index); // temporary (return null means there was an error)
 	}
 	
 	/* Rotates object
@@ -153,7 +155,8 @@ public class Controller {
 	 */
 	public static double[][] rotateObject(int index, double deg) {
 		// rotate object in model
-		return editTest(index); // temporary (return null means there was an error)
+		holder.getObject(index).rotate(deg);
+		return holder.getObjectArray(index); // temporary (return null means there was an error)
 	}
 	
 	/* Shears object
@@ -163,7 +166,8 @@ public class Controller {
 	 */
 	public static double[][] shearObject(int index, double deg) {
 		// rotate object in model
-		return editTest(index); // temporary (return null means there was an error)
+		holder.getObject(index).shearX(deg);
+		return holder.getObjectArray(index); // temporary (return null means there was an error)
 	}
 	
 	/* Scales object
@@ -173,7 +177,9 @@ public class Controller {
 	 */
 	public static double[][] scaleObject(int index, double value) {
 		// rotate object in model
-		return editTest(index); // temporary (return null means there was an error)
+		holder.getObject(index).rescaleX(value);
+		holder.getObject(index).rescaleY(value);
+		return holder.getObjectArray(index); // temporary (return null means there was an error)
 	}
 	
 	/* Reflects object
@@ -183,7 +189,12 @@ public class Controller {
 	 */
 	public static double[][] reflectObject(int index, int type) {
 		// rotate object in model
-		return editTest(index); // temporary (return null means there was an error)
+		if(type == MainView.REFLECT_X) {
+			holder.getObject(index).reflectOverX();
+		} else {
+			holder.getObject(index).reflectOverY();
+		}
+		return holder.getObjectArray(index); // temporary (return null means there was an error)
 	}
 	
 	/* Deletes object
@@ -192,6 +203,7 @@ public class Controller {
 	 */
 	public static boolean deleteObject(int index) {
 		// if able to delete in model
+		holder.removeObject(index);
 		return true; // else return false
 	}
 	

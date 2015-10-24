@@ -1,6 +1,6 @@
 package model;
 
-public class Point extends GraphicObject{
+public class Point extends Object2D{
 
 	private double coordinates[][];
 
@@ -32,7 +32,7 @@ public class Point extends GraphicObject{
 	}
 
 	@Override
-	public void translate(int height, int width) {
+	public void translate(double height, double width) {
 		// TODO Auto-generated method stub
 		double[][] translationMatrix = new double[coordinates.length][coordinates.length];
 		for(int i = 0; i < translationMatrix.length; i++) {

@@ -1,6 +1,6 @@
 package model;
 
-public class Polygon extends GraphicObject{
+public class Polygon extends Object2D{
 
 	private Point[] points;
 	
@@ -8,8 +8,12 @@ public class Polygon extends GraphicObject{
 		this.points = points;
 	}
 	
+	public Point[] getPoints() {
+		return points;
+	}
+	
 	@Override
-	public void translate(int height, int width) {
+	public void translate(double height, double width) {
 		// TODO Auto-generated method stub
 		for(Point point : points) {
 			point.translate(height, width);

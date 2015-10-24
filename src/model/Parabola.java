@@ -1,6 +1,6 @@
 package model;
 
-public class Parabola extends GraphicObject{
+public class Parabola extends Object2D{
 	
 	private Point vertex;
 	private Point focus;
@@ -66,7 +66,7 @@ public class Parabola extends GraphicObject{
 	}*/
 
 	@Override
-	public void translate(int height, int width) {
+	public void translate(double height, double width) {
 		// TODO Auto-generated method stub
 		
 		vertex.translate(height, width);

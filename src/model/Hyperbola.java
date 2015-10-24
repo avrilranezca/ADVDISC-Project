@@ -1,6 +1,6 @@
 package model;
 
-public class Hyperbola extends GraphicObject{
+public class Hyperbola extends Object2D{
 	
 	private Point center;
 	private double horizontalDistance;
@@ -47,7 +47,7 @@ public class Hyperbola extends GraphicObject{
 	}
 
 	@Override
-	public void translate(int height, int width) {
+	public void translate(double height, double width) {
 		// TODO Auto-generated method stub
 		
 		center.translate(height, width);

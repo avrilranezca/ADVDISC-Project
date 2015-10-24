@@ -1,6 +1,6 @@
 package model;
 
-public class Ellipse extends GraphicObject{
+public class Ellipse extends Object2D{
 
 	private Point center;
 	private double width;
@@ -12,8 +12,20 @@ public class Ellipse extends GraphicObject{
 		this.width = width;
 	}
 	
+	public Point getCenter() {
+		return center;
+	}
+	
+	public double getWidth() {
+		return width;
+	}
+	
+	public double getHeight() {
+		return height;
+	}
+	
 	@Override
-	public void translate(int height, int width) {
+	public void translate(double height, double width) {
 		// TODO Auto-generated method stub
 		center.translate(height, width);
 	}
