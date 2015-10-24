@@ -42,15 +42,8 @@ public class Point extends Object2D{
 				}
 			}
 		}
-		
-		for(int i = 0; i < coordinates.length; i++) {
-			if(i == 0) {
-				translationMatrix[i][coordinates.length-1] = width;
-			} else {
-				translationMatrix[i][coordinates.length-1] = height;
-			}
-		}
-		
+		translationMatrix[0][coordinates.length-1] = width;
+		translationMatrix[1][coordinates.length-1] = height;
 		coordinates = Matrix.multiply(translationMatrix, coordinates);
 	}
 
@@ -58,8 +51,8 @@ public class Point extends Object2D{
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
 		angle = Math.toRadians(angle);
-		double rotationMatrix[][] = {{Math.cos(angle), -Math.sin(angle)}, 
-									{Math.sin(angle), Math.cos(angle)}};
+		double rotationMatrix[][] = {{Math.cos(angle), -Math.sin(angle), 0}, 
+									{Math.sin(angle), Math.cos(angle), 0}};
 		coordinates = Matrix.multiply(rotationMatrix, coordinates);
 	}
 

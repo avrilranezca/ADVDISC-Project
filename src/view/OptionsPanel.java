@@ -1265,7 +1265,7 @@ public class OptionsPanel extends JPanel {
 			// Translation
 			if(editing == MainView.EDIT_TRANSLATE){
 				String val1 = field1.getText();
-				String val2 = field1.getText();
+				String val2 = field2.getText();
 				
 				// Error checking
 				if(isValid(val1) && isValid(val2)){
