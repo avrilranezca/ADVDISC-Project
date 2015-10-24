@@ -659,8 +659,8 @@ public class OptionsPanel extends JPanel {
 			// For objects that cannot be scaled
 			if(currObj instanceof PointDrawer){
 				JPanel flow1 = new JPanel();
-				flow1.add(new JLabel("This object cannot be scaled"));
-				this.add(flow1);
+					flow1.add(new JLabel("This object cannot be scaled"));
+					this.add(flow1);
 			
 				buttonCancel = new JButton("Continue");
 					buttonCancel.addActionListener(new cancelListener(this));
@@ -670,10 +670,18 @@ public class OptionsPanel extends JPanel {
 			// For objects that can be scaled
 			else{
 				JPanel flow1 = new JPanel();
-					flow1.add(new JLabel("Scale Value"));
+					flow1.add(new JLabel("Horizontal Scaling Value"));
 					field1 = new JTextField(5);
+					field1.setText("1");
 					flow1.add(field1);
 					this.add(flow1);
+					
+				JPanel flow2 = new JPanel();
+					flow2.add(new JLabel("Vertical Scaling Value"));
+					field2 = new JTextField(5);
+					field2.setText("1");
+					flow2.add(field2);
+					this.add(flow2);
 				
 				buttonCancel = new JButton("Cancel");
 					buttonCancel.addActionListener(new cancelListener(this));
@@ -684,9 +692,6 @@ public class OptionsPanel extends JPanel {
 						  updatePanel);
 					this.add(buttonAdd);
 			}
-				
-			
-			
 		}
 	}
 	
@@ -1338,16 +1343,19 @@ public class OptionsPanel extends JPanel {
 			
 			// Scaling
 			else if(editing == MainView.EDIT_SCALE){
-				double d = 0;
+				double x = 1;
+				double y = 1;
 				
-				String val = field1.getText();
+				String val1 = field1.getText();
+				String val2 = field2.getText();
 				
 				// Error checking
-				if(isValid(val)){
-					d = Double.parseDouble(field1.getText());
+				if(isPositive(val1) && isPositive(val2)){
+					x = Double.parseDouble(val1);
+					y = Double.parseDouble(val2);
 
 					// Get new object values from model
-					data = Controller.scaleObject(currentlyEditing, d);
+					data = Controller.scaleObject(currentlyEditing, x, y);
 				}
 			}
 			

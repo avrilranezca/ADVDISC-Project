@@ -145,7 +145,7 @@ public class Controller {
 	public static double[][] translateObject(int index, double x, double y) {
 		// translate object in model
 		holder.getObject(index).translate(y, x);
-		return holder.getObjectArray(index); // temporary (return null means there was an error)
+		return holder.getObjectArray(index);
 	}
 	
 	/* Rotates object
@@ -156,7 +156,7 @@ public class Controller {
 	public static double[][] rotateObject(int index, double deg) {
 		// rotate object in model
 		holder.getObject(index).rotate(deg);
-		return holder.getObjectArray(index); // temporary (return null means there was an error)
+		return holder.getObjectArray(index);
 	}
 	
 	/* Shears object
@@ -167,19 +167,20 @@ public class Controller {
 	public static double[][] shearObject(int index, double deg) {
 		// rotate object in model
 		holder.getObject(index).shearX(deg);
-		return holder.getObjectArray(index); // temporary (return null means there was an error)
+		return holder.getObjectArray(index);
 	}
 	
 	/* Scales object
 	 * @param index index in the list of object to be edited
-	 * @param value scaling value
+	 * @param x     horizontal scaling value
+	 * @param y		vertical scaling value
 	 * @return new matrix data of object*
 	 */
-	public static double[][] scaleObject(int index, double value) {
+	public static double[][] scaleObject(int index, double x, double y) {
 		// rotate object in model
-		holder.getObject(index).rescaleX(value);
-		holder.getObject(index).rescaleY(value);
-		return holder.getObjectArray(index); // temporary (return null means there was an error)
+		holder.getObject(index).rescaleX(x);
+		holder.getObject(index).rescaleY(y);
+		return holder.getObjectArray(index);
 	}
 	
 	/* Reflects object
@@ -194,7 +195,7 @@ public class Controller {
 		} else {
 			holder.getObject(index).reflectOverY();
 		}
-		return holder.getObjectArray(index); // temporary (return null means there was an error)
+		return holder.getObjectArray(index);
 	}
 	
 	/* Deletes object
