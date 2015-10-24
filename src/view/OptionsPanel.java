@@ -55,8 +55,8 @@ public class OptionsPanel extends JPanel {
 	JButton		      buttonCancel;	// generic cancel button
 
 	// For adding polygons
-	ArrayList<Integer> polygonXCoords; // x coordinates of polygon being added
-	ArrayList<Integer> polygonYCoords; // y coordinates of polygon being added
+	ArrayList<Double> polygonXCoords; // x coordinates of polygon being added
+	ArrayList<Double> polygonYCoords; // y coordinates of polygon being added
 	
 	// For track of what's being edited
 	int 		  currentlyEditing;	// index of object currently being edited
@@ -341,8 +341,8 @@ public class OptionsPanel extends JPanel {
 		public addPolygonPanel(){
 			System.out.println("OptionsPanel > addPolygonPanel");
 
-			polygonXCoords = new ArrayList<Integer>();
-			polygonYCoords = new ArrayList<Integer>();
+			polygonXCoords = new ArrayList<Double>();
+			polygonYCoords = new ArrayList<Double>();
 					
 			this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 			
@@ -392,8 +392,8 @@ public class OptionsPanel extends JPanel {
 					&& OptionsPanel.this.isValid(val2)){
 					
 					// Add to list of points
-					polygonXCoords.add(Integer.parseInt(val1));
-					polygonYCoords.add(Integer.parseInt(val2));
+					polygonXCoords.add(Double.parseDouble(val1));
+					polygonYCoords.add(Double.parseDouble(val2));
 					
 					// Clear fields
 					field1.setText("");
@@ -1021,8 +1021,8 @@ public class OptionsPanel extends JPanel {
 				
 				// Error checking
 				if(isValid(val1) && isValid(val2)){
-					int x = Integer.parseInt(val1);
-					int y = Integer.parseInt(val2);
+					double x = Double.parseDouble(val1);
+					double y = Double.parseDouble(val2);
 
 					// If successfully added to model
 					if(Controller.addPoint(x, y)){ 
@@ -1050,10 +1050,10 @@ public class OptionsPanel extends JPanel {
 				if(isValid(val1) && isValid(val2) && isValid(val3)
 					&& isValid(val4)){
 
-					int x1 = Integer.parseInt(val1);
-					int y1 = Integer.parseInt(val2);
-					int x2 = Integer.parseInt(val3);
-					int y2 = Integer.parseInt(val4);
+					double x1 = Double.parseDouble(val1);
+					double y1 = Double.parseDouble(val2);
+					double x2 = Double.parseDouble(val3);
+					double y2 = Double.parseDouble(val4);
 					
 					// If successfully added to model
 					if(Controller.addLine(x1, y1, x2, y2)){
@@ -1082,10 +1082,10 @@ public class OptionsPanel extends JPanel {
 				if(isValid(val1) && isValid(val2) && isPositive(val3)
 					&& isPositive(val4)){
 
-					int x = Integer.parseInt(val1);
-					int y = Integer.parseInt(val2);
-					int w = Integer.parseInt(val3);
-					int h = Integer.parseInt(val4);
+					double x = Double.parseDouble(val1);
+					double y = Double.parseDouble(val2);
+					double w = Double.parseDouble(val3);
+					double h = Double.parseDouble(val4);
 					
 					// If successfully added to model
 					if(Controller.addEllipse(x, y, w, h)){
@@ -1137,10 +1137,10 @@ public class OptionsPanel extends JPanel {
 				
 				// Error checking
 				if(isValid(val1) && isValid(val2) && isPositive(val3)){
-					int x = Integer.parseInt(val1);
-					int y = Integer.parseInt(val2);
-					int f = Integer.parseInt(val3);
-					int d = dropdown.getSelectedIndex() + 1;
+					double x = Double.parseDouble(val1);
+					double y = Double.parseDouble(val2);
+					double f = Double.parseDouble(val3);
+					int    d = dropdown.getSelectedIndex() + 1;
 					
 					// If successfully added to model
 					if(Controller.addParabola(x, y, f, d)){
@@ -1169,11 +1169,11 @@ public class OptionsPanel extends JPanel {
 				if(isValid(val1) && isValid(val2) && isPositive(val3)
 					&& isPositive(val4)){
 					
-					int x  = Integer.parseInt(val1);
-					int y  = Integer.parseInt(val2);
-					int xd = Integer.parseInt(val3);
-					int yd = Integer.parseInt(val4);
-					int d  = dropdown.getSelectedIndex() + 1;
+					double x  = Double.parseDouble(val1);
+					double y  = Double.parseDouble(val2);
+					double xd = Double.parseDouble(val3);
+					double yd = Double.parseDouble(val4);
+					int    d  = dropdown.getSelectedIndex() + 1;
 					
 					// If successfully added to model
 					if(Controller.addHyperbola(x, y, xd, yd, d)){

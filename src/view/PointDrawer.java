@@ -6,12 +6,12 @@ import java.awt.geom.Ellipse2D;
 
 public class PointDrawer extends GraphicObject {
 
-	int  xCoord;
-	int  yCoord;
+	double  xCoord;
+	double  yCoord;
 	
 	public PointDrawer(double x, double y, boolean r){
-		xCoord = (int) x;
-		yCoord = (int) y;
+		xCoord = x;
+		yCoord = y;
 		isRed  = r;
 	}
 	

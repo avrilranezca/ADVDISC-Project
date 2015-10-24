@@ -6,16 +6,16 @@ import java.awt.geom.Ellipse2D;
 
 public class EllipseDrawer extends GraphicObject {
 
-	int xCoord;
-	int yCoord;
-	int width;
-	int height;
+	double xCoord;
+	double yCoord;
+	double width;
+	double height;
 	
 	public EllipseDrawer(double x, double y, double w, double h, boolean r) {
-		xCoord = (int)x;
-		yCoord = (int)y;
-		width  = (int)w;
-		height = (int)h;
+		xCoord = x;
+		yCoord = y;
+		width  = w;
+		height = h;
 		isRed  = r;
 	}
 	
