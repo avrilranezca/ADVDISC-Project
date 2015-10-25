@@ -575,12 +575,14 @@ public class OptionsPanel extends JPanel {
 			JPanel flow1 = new JPanel();
 				flow1.add(new JLabel("X-Axis Translation"));
 				field1 = new JTextField(5);
+				field1.setText("0");
 				flow1.add(field1);
 				this.add(flow1);
 				
 			JPanel flow2 = new JPanel();
 				flow2.add(new JLabel("Y-Axis Translation"));
 				field2 = new JTextField(5);
+				field2.setText("0");
 				flow2.add(field2);
 				this.add(flow2);
 				
