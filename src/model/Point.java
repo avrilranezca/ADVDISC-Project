@@ -60,7 +60,8 @@ public class Point extends Object2D{
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
 		double reflectionMatrix[][] = {{1, 0, 0},
-									{0, -1, 0}};
+									{0, -1, 0},
+									{0, 0, 1}};
 		coordinates = Matrix.multiply(reflectionMatrix, coordinates);
 	}
 
@@ -68,7 +69,8 @@ public class Point extends Object2D{
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
 		double reflectionMatrix[][] = {{-1, 0, 0},
-									{0, 1, 0}};
+									{0, 1, 0},
+									{0, 0, 1}};
 		coordinates = Matrix.multiply(reflectionMatrix, coordinates);
 	}
 
