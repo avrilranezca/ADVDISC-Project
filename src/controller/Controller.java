@@ -130,7 +130,11 @@ public class Controller {
 	 */
 	public static double[][] shearObject(int index, double deg, int axis) {
 		// rotate object in model
-		holder.getObject(index).shearX(deg);
+		if(axis == MainView.SHEAR_X) {
+			holder.getObject(index).shearX(deg);
+		} else {
+			holder.getObject(index).shearY(deg);
+		}
 		return holder.getObjectArray(index);
 	}
 	
