@@ -59,13 +59,17 @@ public class Point extends Object2D{
 	@Override
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
-		setY(-getY());
+		double reflectionMatrix[][] = {{1, 0, 0},
+									{0, -1, 0}};
+		coordinates = Matrix.multiply(reflectionMatrix, coordinates);
 	}
 
 	@Override
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
-		setX(-getX());
+		double reflectionMatrix[][] = {{-1, 0, 0},
+									{0, 1, 0}};
+		coordinates = Matrix.multiply(reflectionMatrix, coordinates);
 	}
 
 	@Override
