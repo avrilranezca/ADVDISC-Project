@@ -12,13 +12,12 @@ public class ParabolaDrawer extends GraphicObject {
 	double focalLength;
 	int    direction;
 	
-	public ParabolaDrawer(double x, double y, double f, int d, boolean r){
+	public ParabolaDrawer(double x, double y, double f, int d){
 		xCoord      = x;
 		yCoord      = y;
 		focalLength = f;
 		direction   = d;
-		isRed       = r;
-		System.out.println("ParabolaDrawer: " + x + ", " + y + ", " + f + ", " + d);
+		isRed       = false;
 	}
 	
 	public void paintObject(Graphics2D g2d) {
@@ -93,22 +92,6 @@ public class ParabolaDrawer extends GraphicObject {
 		            }
 		            
 		        }
-		        
-//		        switch(direction){
-//		        
-//		        	case 1:
-//		        		q.setCurve(312 + ((xCoord + focalLength) * 13), 312 + ((yCoord - 2 * focalLength) * -13),
-//			    				   312 + (xCoord * 13) - 13 * focalLength, 312 + (yCoord * -13),
-//			    				   312 + ((xCoord + focalLength) * 13), 312 + ((yCoord + 2 * focalLength) * -13));
-//		        		
-//		        		break;
-//		        		
-//		        	case 2:
-//		        		 q.setCurve(312 + ((xCoord - focalLength) * 13), 312 + ((yCoord - 2 * focalLength) * -13),
-//			    				    312 + (xCoord * 13) + 13 * focalLength, 312 + (yCoord * -13),
-//			    				    312 + ((xCoord - focalLength) * 13), 312 + ((yCoord + 2 * focalLength) * -13));
-//		        
-//		        }
 		        
 		        break;
 		

@@ -22,7 +22,7 @@ public class Grid extends Canvas {
     }
     
     public void paint(Graphics g) {
-    	System.out.println("Grid: paint");
+    	System.out.println("Grid.paint(g)");
 	    int k;
 	    width = getSize().width;
 	    height = getSize().height;

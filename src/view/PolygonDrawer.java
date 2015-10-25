@@ -9,20 +9,20 @@ public class PolygonDrawer extends GraphicObject {
 	
 	double[][] points;
 	
-	public PolygonDrawer(double[][] p, boolean r){
+	public PolygonDrawer(double[][] p){
 		points = p;
-		isRed  = r;
+		isRed  = false;
 	}
 	
 	public void paintObject(Graphics2D g2d) {
-		//g2d.drawRect(312 + (xCoord * 13) , 312 + (yCoord * -13), width * 13, height * 13);
-		GeneralPath polygon = 
-		        new GeneralPath(GeneralPath.WIND_EVEN_ODD,
-		                        points.length);
+		GeneralPath polygon =  new GeneralPath(GeneralPath.WIND_EVEN_ODD,
+											   points.length);
+		
 		polygon.moveTo(312 + (points[0][0] * 13), 312 + (points[0][1] * -13));
 
 		for (int index = 1; index < points.length; index++) {
-		        polygon.lineTo(312 + (points[index][0] * 13), 312 + (points[index][1] * -13));
+		        polygon.lineTo(312 + (points[index][0] * 13),
+		        			   312 + (points[index][1] * -13));
 		};
 
 		polygon.closePath();

@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	void refreshGrid(){
-		System.out.println("MainFrame: refreshGrid");
+		System.out.println("MainFrame.refreshGrid()");
 		container.remove(editPanel);
 		editPanel = new EditPanel(view);
 		container.add(editPanel);

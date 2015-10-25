@@ -9,12 +9,12 @@ public class LineDrawer extends GraphicObject {
 	double xCoord2;
 	double yCoord2;
 	
-	public LineDrawer(double x, double y, double x2, double y2, boolean r) {
+	public LineDrawer(double x, double y, double x2, double y2) {
 		xCoord  = x;
 		yCoord  = y;
 		xCoord2 = x2;
 		yCoord2 = y2;
-		isRed   = r;
+		isRed   = false;
 	}
 
 	public void paintObject(Graphics2D g2d) {

@@ -115,7 +115,7 @@ public class MainView {
 	 */
 	public void addPoint(double x, double y){
 		System.out.println("MainView.addPoint(" + x + ", " + y + ")");
-		objectList.add(new PointDrawer(x, y, false));
+		objectList.add(new PointDrawer(x, y));
 		selectedObject = objectList.size() - 1;
 		refreshGrid();
 	}
@@ -128,7 +128,7 @@ public class MainView {
 	 */
 	public void addLine(double x1, double y1, double x2, double y2){
 		System.out.println("MainView.addLine(" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ")");
-		objectList.add(new LineDrawer(x1, y1, x2, y2, false));
+		objectList.add(new LineDrawer(x1, y1, x2, y2));
 		selectedObject = objectList.size() - 1;
 		refreshGrid();
 	}
@@ -141,7 +141,7 @@ public class MainView {
 	 */
 	public void addEllipse(double x, double y, double w, double h){
 		System.out.println("MainView.addEllipse(" + x + ", " + y + ", " + w + ", " + h + ")");
-		objectList.add(new EllipseDrawer(x, y, w, h, false));
+		objectList.add(new EllipseDrawer(x, y, w, h));
 		selectedObject = objectList.size() - 1;
 		refreshGrid();
 	}
@@ -153,7 +153,7 @@ public class MainView {
 	 */
 	public void addPolygon(double[][] p){
 		System.out.println("MainView: addPolygon");
-		objectList.add(new PolygonDrawer(p, false));
+		objectList.add(new PolygonDrawer(p));
 		selectedObject = objectList.size() - 1;
 		refreshGrid();
 	}
@@ -169,7 +169,7 @@ public class MainView {
 	 */
 	public void addParabola(double x, double y, double f, int d){
 		System.out.println("MainView: addParabola (" + x + ", " + y + ", " + f + ", " + d + ")");
-		objectList.add(new ParabolaDrawer(x, y, f, d, false));
+		objectList.add(new ParabolaDrawer(x, y, f, d));
 		selectedObject = objectList.size() - 1;
 		refreshGrid();
 	}
@@ -184,7 +184,7 @@ public class MainView {
 	 */
 	public void addHyperbola(double x, double y, double xd, double yd, int d){
 		System.out.println("MainView: addHyperbola (" + x + ", " + y + ", " + xd + ", " + yd + ", " + d + ")");
-		objectList.add(new HyperbolaDrawer(x, y, xd, yd, d, false));
+		objectList.add(new HyperbolaDrawer(x, y, xd, yd, d));
 		selectedObject = objectList.size() - 1;
 		refreshGrid();
 	}
@@ -200,22 +200,22 @@ public class MainView {
 		GraphicObject o = objectList.get(index);
 		
 		if(o instanceof PointDrawer){
-			objectList.set(index, new PointDrawer(data[0][0], data[0][1], false));
+			objectList.set(index, new PointDrawer(data[0][0], data[0][1]));
 		}
 		else if(o instanceof LineDrawer){
-			objectList.set(index, new LineDrawer(data[0][0], data[0][1], data[1][0], data[1][1], false));
+			objectList.set(index, new LineDrawer(data[0][0], data[0][1], data[1][0], data[1][1]));
 		}
 		else if(o instanceof EllipseDrawer){
-			objectList.set(index, new EllipseDrawer(data[0][0], data[0][1], data[1][0], data[1][1], false));
+			objectList.set(index, new EllipseDrawer(data[0][0], data[0][1], data[1][0], data[1][1]));
 		}
 		else if(o instanceof PolygonDrawer){
-			objectList.set(index, new PolygonDrawer(data, false));
+			objectList.set(index, new PolygonDrawer(data));
 		}
 		else if(o instanceof ParabolaDrawer){
-			objectList.set(index, new ParabolaDrawer(data[0][0], data[0][1], data[1][0], (int)data[1][1], false));
+			objectList.set(index, new ParabolaDrawer(data[0][0], data[0][1], data[1][0], (int)data[1][1]));
 		}
 		else if(o instanceof HyperbolaDrawer){
-			objectList.set(index, new HyperbolaDrawer(data[0][0], data[0][1], data[1][0], data[1][1], (int)data[2][0], false));
+			objectList.set(index, new HyperbolaDrawer(data[0][0], data[0][1], data[1][0], data[1][1], (int)data[2][0]));
 		}
 		
 		objectList.add(previous);

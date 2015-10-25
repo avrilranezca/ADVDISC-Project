@@ -6,21 +6,29 @@ import java.awt.geom.Ellipse2D;
 
 public class EllipseDrawer extends GraphicObject {
 
-	double xCoord;
-	double yCoord;
+	double xCoord; // x coordinate of center
+	double yCoord; // y coordinate of center
 	double width;
 	double height;
 	
-	public EllipseDrawer(double x, double y, double w, double h, boolean r) {
+	/* Constructor
+	 * @param x x coordinate of center
+	 * @param y y coordinate of center
+	 * @param w width
+	 * @param h height
+	 */
+	public EllipseDrawer(double x, double y, double w, double h) {
 		xCoord = x;
 		yCoord = y;
 		width  = w;
 		height = h;
-		isRed  = r;
+		isRed  = false;
 	}
 	
 	public void paintObject(Graphics2D g2d) {
-		Shape theCircle = new Ellipse2D.Double(312 + ((xCoord - width/2) * 13), 312 + ((yCoord + height/2) * -13), width * 13, height * 13);
+		Shape theCircle = new Ellipse2D.Double(312 + ((xCoord - width/2) * 13),
+											   312 + ((yCoord + height/2) * -13),
+											   width * 13, height * 13);
 		g2d.draw(theCircle);
 	}
 	

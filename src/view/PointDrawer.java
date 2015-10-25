@@ -9,14 +9,16 @@ public class PointDrawer extends GraphicObject {
 	double  xCoord;
 	double  yCoord;
 	
-	public PointDrawer(double x, double y, boolean r){
+	public PointDrawer(double x, double y){
 		xCoord = x;
 		yCoord = y;
-		isRed  = r;
+		isRed  = false;
 	}
 	
 	public void paintObject(Graphics2D g2d) {
-		Shape theCircle = new Ellipse2D.Double(310 + (xCoord * 13), 310 + (yCoord * -13), 4, 4);
+		Shape theCircle = new Ellipse2D.Double(310 + (xCoord * 13),
+											   310 + (yCoord * -13),
+											   4, 4);
 		g2d.fill(theCircle);
 		g2d.draw(theCircle);
 	}

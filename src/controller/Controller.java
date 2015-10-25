@@ -178,7 +178,7 @@ public class Controller {
 	
 }
 
-/* Matrix data (WHAT CLARISSE ASSUMED) (all of them are double[][])
+/* Matrix data (all of them are double[][])
  * ----------------------------------------------------------------------------
  * 
  * Point

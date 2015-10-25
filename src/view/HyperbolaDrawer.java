@@ -10,13 +10,13 @@ public class HyperbolaDrawer extends GraphicObject {
 	double yDistance;
 	int    direction;
 	
-	public HyperbolaDrawer(double x, double y, double xd, double yd, int d, boolean r){
+	public HyperbolaDrawer(double x, double y, double xd, double yd, int d){
 		xCoord      = x;
 		yCoord      = y;
 		xDistance   = xd;
 		yDistance   = yd;
 		direction   = d;
-		isRed       = r;
+		isRed       = false;
 	}
 	
 	public void paintObject(Graphics2D g2d) {
