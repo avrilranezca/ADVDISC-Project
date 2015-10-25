@@ -1379,8 +1379,6 @@ public class OptionsPanel extends JPanel {
 				displayError();
 			}
 
-			editing = 0; // Remove from editing mode
-
 			repaint();
 			revalidate();
 		}
@@ -1405,7 +1403,7 @@ public class OptionsPanel extends JPanel {
 	
 // CANCEL LISTENER
 	
-	/* Listener for cancelling add/edit */
+	/* Listener for canceling add/edit */
 	private class cancelListener implements ActionListener {
 		JPanel updatePanel;
 		
