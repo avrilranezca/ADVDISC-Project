@@ -156,6 +156,13 @@ public class Parabola extends Object2D{
 		
 		/*directrixValue = -directrixValue;*/
 		
+		if(direction == 3) {
+			direction = 4;
+		}
+		else if(direction == 4) {
+			direction = 3;
+		}
+		
 		vertex.reflectOverX();
 		focus.reflectOverX();
 	}
@@ -168,6 +175,13 @@ public class Parabola extends Object2D{
 		focus.setY(-vertex.getY());*/
 		
 		/*directrixValue = -directrixValue;*/
+		
+		if(direction == 1) {
+			direction = 2;
+		}
+		else if(direction == 2) {
+			direction = 1;
+		}
 		
 		vertex.reflectOverY();
 		focus.reflectOverY();
