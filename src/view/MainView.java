@@ -67,25 +67,29 @@ public class MainView {
 	/* Selects previous object
 	*/
 	public void movePrevObject(){
-		if(selectedObject == 0){
-			selectedObject = objectList.size() - 1;
+		if(objectList.size() > 0){
+			if(selectedObject == 0){
+				selectedObject = objectList.size() - 1;
+			}
+			else {
+				selectedObject = (selectedObject - 1) % objectList.size();
+			}
+			refreshGrid();
 		}
-		else {
-			selectedObject = (selectedObject - 1) % objectList.size();
-		}
-		refreshGrid();
 	}
 	
 	/* Selects next object
 	*/
 	public void moveNextObject(){
-		if(selectedObject == objectList.size() - 1){
-			selectedObject = 0;
+		if(objectList.size() > 0){
+			if(selectedObject == objectList.size() - 1){
+				selectedObject = 0;
+			}
+			else {
+				selectedObject = (selectedObject + 1) % objectList.size();
+			}
+			refreshGrid();
 		}
-		else {
-			selectedObject = (selectedObject + 1) % objectList.size();
-		}
-		refreshGrid();
 	}
 	
 	/* Redraws grid and objects
