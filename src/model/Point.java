@@ -51,8 +51,9 @@ public class Point extends Object2D{
 	public void rotate(double angle) {
 		// TODO Auto-generated method stub
 		angle = Math.toRadians(angle);
-		double rotationMatrix[][] = {{Math.cos(Math.toRadians(angle)), -Math.sin(Math.toRadians(angle)), 0}, 
-									{Math.sin(Math.toRadians(angle)), Math.cos(Math.toRadians(angle)), 0}};
+		double rotationMatrix[][] = {{Math.cos(angle), -Math.sin(angle), 0}, 
+									{Math.sin(angle), Math.cos(angle), 0},
+									{0, 0, 1}};
 		coordinates = Matrix.multiply(rotationMatrix, coordinates);
 	}
 
