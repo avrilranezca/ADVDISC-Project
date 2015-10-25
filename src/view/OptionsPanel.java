@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,6 +46,7 @@ public class OptionsPanel extends JPanel {
 	JButton buttonDelete;
 	
 	// Input panel UI elements
+	JScrollPane		  scrollInput;  // scroll pane for input
 	JPanel  		  panelInput;   // panel containing all input UI
 	JTextField        field1;	    // generic text field
 	JTextField        field2;		// generic text field
@@ -67,18 +69,22 @@ public class OptionsPanel extends JPanel {
 	MainView   view;
 	
 	public OptionsPanel(MainView v){
-		view 			 = v;						 // main view clas
+		view 			 = v;						 // main view class
 		currentlyEditing = view.getSelectedObject(); // object selected by user
 		editing 		 = 0;						 // sets to "not editing" mode
 		
 		this.setLayout(null);
 		
 		// Panel Input
-		
+			
 		panelInput = new JPanel();
-			this.add(panelInput);
+			panelInput.setMinimumSize(new Dimension(260, 290));
 			panelInput.setLayout(new BorderLayout());
-			panelInput.setBounds(10, 320, 265, 300);
+			
+		scrollInput = new JScrollPane(panelInput);
+			this.add(scrollInput);
+			scrollInput.setBounds(10, 320, 265, 300);
+			
 		
 		// Select Object
 		

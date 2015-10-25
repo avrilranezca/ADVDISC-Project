@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setTitle("Computer Graphics");
 		this.setSize(new Dimension(925, 657));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		
