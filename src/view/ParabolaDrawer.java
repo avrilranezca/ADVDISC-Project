@@ -147,18 +147,30 @@ public class ParabolaDrawer extends GraphicObject {
 	
 // GETTERS
 	
+	/* Returns x coordinate of vertex
+	 * @return x coordinate of vertex
+	 */
 	public double getXCoord(){
 		return xCoord;
 	}
 	
+	/* Returns y coordinate of vertex
+	 * @return y coordinate of vertex
+	 */
 	public double getYCoord(){
 		return yCoord;
 	}
 	
+	/* Returns focal length
+	 * @return focal length
+	 */
 	public double getFocalLength(){
 		return focalLength;
 	}
 	
+	/* Returns direction of opening
+	 * @return direction of opening
+	 */
 	public int getDirection(){
 		return direction;
 		

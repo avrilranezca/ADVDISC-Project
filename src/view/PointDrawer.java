@@ -6,15 +6,22 @@ import java.awt.geom.Ellipse2D;
 
 public class PointDrawer extends GraphicObject {
 
-	double  xCoord;
-	double  yCoord;
+	double  xCoord; // x coordinate of point
+	double  yCoord; // y coordinate of point
 	
+	/* Constructor
+	 * @param x x coordinate of point
+	 * @param y y coordinate of point
+	 */
 	public PointDrawer(double x, double y){
 		xCoord = x;
 		yCoord = y;
 		isRed  = false;
 	}
 	
+	/* Draws point
+	 * @param g2d Graphics2D object
+	 */
 	public void paintObject(Graphics2D g2d) {
 		Shape theCircle = new Ellipse2D.Double(310 + (xCoord * 13),
 											   310 + (yCoord * -13),
@@ -25,10 +32,16 @@ public class PointDrawer extends GraphicObject {
 	
 // GETTERS
 
+	/* Returns x coordinate of point
+	 * @return x coordinate of point
+	 */
 	public double getXCoord(){
 		return xCoord;
 	}
 	
+	/* Returns y coordinate of point
+	 * @return y coordinate of point
+	 */
 	public double getYCoord(){
 		return yCoord;
 	}
