@@ -25,6 +25,9 @@ public class EllipseDrawer extends GraphicObject {
 		isRed  = false;
 	}
 	
+	/* Draws ellipse
+	 * @param g2d Graphics2D object
+	 */
 	public void paintObject(Graphics2D g2d) {
 		Shape theCircle = new Ellipse2D.Double(312 + ((xCoord - width/2) * 13),
 											   312 + ((yCoord + height/2) * -13),
@@ -34,10 +37,16 @@ public class EllipseDrawer extends GraphicObject {
 	
 // GETTERS
 	
+	/* Returns center x coordinate value
+	 * @return center x coordinate value
+	 */
 	public double getXCoord(){
 		return xCoord;
 	}
 	
+	/* Returns center y coordinate value
+	 * @return center y coordinate value
+	 */
 	public double getYCoord(){
 		return yCoord;
 	}

@@ -7,11 +7,17 @@ import java.math.*;
 
 public class ParabolaDrawer extends GraphicObject {
 
-	double xCoord;
-	double yCoord;
-	double focalLength;
-	int    direction;
+	double xCoord;      // x coordinate of vertex
+	double yCoord;      // y coordinate of vertex
+	double focalLength; // focal length
+	int    direction;   // direction of opening
 	
+	/* Constructor
+	 * @param x x coordinate of vertex
+	 * @param y y coordinate of vertex
+	 * @param f focal length
+	 * @param d direction of opening
+	 */
 	public ParabolaDrawer(double x, double y, double f, int d){
 		xCoord      = x;
 		yCoord      = y;
@@ -20,140 +26,123 @@ public class ParabolaDrawer extends GraphicObject {
 		isRed       = false;
 	}
 	
+	/* Draws parabola
+	 * @param g2d Graphics2D object
+	 */
 	public void paintObject(Graphics2D g2d) {
-		
-		QuadCurve2D q = new QuadCurve2D.Float();
-		
-		double x = 0;
-		double y = 0;
+		double x     = 0;
+		double y     = 0;
 		double prevy = 0;
 		double prevx = 0;
 		
-		switch(direction){
-		
-			case 1:
-			case 2:
+		// If horizontal opening
+		if(direction == MainView.PARABOLA_RIGHT
+		   || direction == MainView.PARABOLA_LEFT){
 				
-		        for(x=0;x<=500;x++){
-		        	
-		        	if(x != 0){
-		        		prevx = x - 1;
-						prevy = y;
-		        	}
-		        	
-		        	y = Math.sqrt(4 * focalLength * x * 13);
-		        	
-		        	if(x == 0){
-		        		prevy = y;
-		        		prevx = x;
-		        	}
-		        	
-		        	if(Double.isNaN(prevy)){
-						prevy = y;
-						prevx = x;
-					}
+	        for(x = 0; x < 624; x++){
+	        	
+	        	if(x != 0){
+	        		prevx = x - 1;
+					prevy = y;
+	        	}
+	        	
+	        	y = Math.sqrt(4 * focalLength * x * 13);
+	        	
+	        	if(x == 0){
+	        		prevy = y;
+	        		prevx = x;
+	        	}
+	        	
+	        	if(Double.isNaN(prevy)){
+					prevy = y;
+					prevx = x;
+				}
+	            
+	            // If opening to the right
+	            if(direction == MainView.PARABOLA_RIGHT
+	               && !Double.isNaN(y) && !Double.isNaN(x)){
+
+		            g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
+		            			 (int)((312 + (yCoord * -13)) - prevy),
+		            			 (int)((312 + (xCoord * 13)) + x),
+		            			 (int)((312 + (yCoord * -13)) - y));
 		            
-		            switch(direction){
-			            case 1:
-			            	
-			            	if(!Double.isNaN(y) && !Double.isNaN(x)){
-			            		
-					            g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
-					            			 (int)((312 + (yCoord * -13)) - prevy),
-					            			 (int)((312 + (xCoord * 13)) + x),
-					            			 (int)((312 + (yCoord * -13)) - y));
-					            
-					            g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
-					            			 (int)((312 + (yCoord * -13)) + prevy),
-					            			 (int)((312 + (xCoord * 13)) + x),
-					            			 (int)((312 + (yCoord * -13)) + y));
-					            
-			            	}
-				            
-				            break;
-				            
-			            case 2:
-			            	
-			            	if(!Double.isNaN(y) && !Double.isNaN(x)){
-			            		
-				            	g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
-				            			     (int)((312 + (yCoord * -13)) - prevy),
-					            			 (int)((312 + (xCoord * 13)) - x),
-					            			 (int)((312 + (yCoord * -13)) - y));
-				            	
-					            g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
-					            		     (int)((312 + (yCoord * -13)) + prevy),
-					            		     (int)((312 + (xCoord * 13)) - x),
-					            		     (int)((312 + (yCoord * -13)) + y));
-					            
-			            	}
-				            
-				            break;
-		            }
-		            
-		        }
-		        
-		        break;
-		
-		
-			case 3:
-			case 4:
-				
-		        for(y=0;y<=500;y++){
-		        	
-		        	if(y != 0){
-		        		prevx = x;
-						prevy = y - 1;
-		        	}
-		        	
-		        	x = Math.sqrt(4 * focalLength * y * 13);
-		        	
-		        	if(y == 0){
-		        		prevy = y;
-		        		prevx = x;
-		        	}
-		        	
-		        	if(Double.isNaN(prevx)){
-						prevy = y;
-						prevx = x;
-					}
-		            
-		            switch(direction){
-			            case 3:
-			            	
-				            g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
-				            			 (int)((312 + (yCoord * -13)) - prevy),
-				            			 (int)((312 + (xCoord * 13)) + x),
-				            			 (int)((312 + (yCoord * -13)) - y));
-				            
-				            g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
-				            			 (int)((312 + (yCoord * -13)) - prevy),
-				            			 (int)((312 + (xCoord * 13)) - x),
-				            			 (int)((312 + (yCoord * -13)) - y));
-				    		
-				            break;
-				            
-			            case 4:
-			            	
-			            	g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
-			            			     (int)((312 + (yCoord * -13)) + prevy),
-				            			 (int)((312 + (xCoord * 13)) + x),
-				            			 (int)((312 + (yCoord * -13)) + y));
-			            	
-				            g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
-				            		     (int)((312 + (yCoord * -13)) + prevy),
-				            		     (int)((312 + (xCoord * 13)) - x),
-				            		     (int)((312 + (yCoord * -13)) + y));
-				            
-				            break;
-		            }
-		        }
-		        
-		        break;
-		        
+		            g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
+		            			 (int)((312 + (yCoord * -13)) + prevy),
+		            			 (int)((312 + (xCoord * 13)) + x),
+		            			 (int)((312 + (yCoord * -13)) + y));
+			    }
+			            
+			    // If opening to the left
+		        else if(direction == MainView.PARABOLA_LEFT
+		        		&& !Double.isNaN(y) && !Double.isNaN(x)){
+	            		
+	            	g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
+	            			     (int)((312 + (yCoord * -13)) - prevy),
+		            			 (int)((312 + (xCoord * 13)) - x),
+		            			 (int)((312 + (yCoord * -13)) - y));
+	            	
+		            g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
+		            		     (int)((312 + (yCoord * -13)) + prevy),
+		            		     (int)((312 + (xCoord * 13)) - x),
+		            		     (int)((312 + (yCoord * -13)) + y));
+			    }
+		    }
 		}
 		
-		g2d.draw(q);
+		// If vertical opening
+		else if(direction == MainView.PARABOLA_UP
+				|| direction == MainView.PARABOLA_DOWN){
+			
+	        for(y = 0; y < 624; y++){
+	        	
+	        	if(y != 0){
+	        		prevx = x;
+					prevy = y - 1;
+	        	}
+	        	
+	        	x = Math.sqrt(4 * focalLength * y * 13);
+	        	
+	        	if(y == 0){
+	        		prevy = y;
+	        		prevx = x;
+	        	}
+	        	
+	        	if(Double.isNaN(prevx)){
+					prevy = y;
+					prevx = x;
+				}
+	            
+	            // If opening upwards
+	            if(direction == MainView.PARABOLA_UP
+	               && !Double.isNaN(y) && !Double.isNaN(x)){
+		            g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
+		            			 (int)((312 + (yCoord * -13)) - prevy),
+		            			 (int)((312 + (xCoord * 13)) + x),
+		            			 (int)((312 + (yCoord * -13)) - y));
+		            
+		            g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
+		            			 (int)((312 + (yCoord * -13)) - prevy),
+		            			 (int)((312 + (xCoord * 13)) - x),
+		            			 (int)((312 + (yCoord * -13)) - y));
+			    }
+			        
+			    // if opening downwards    
+		        else if(direction == MainView.PARABOLA_DOWN
+	            	    && !Double.isNaN(y) && !Double.isNaN(x)){
+		            	
+	            	g2d.drawLine((int)((312 + (xCoord * 13)) + prevx),
+	            			     (int)((312 + (yCoord * -13)) + prevy),
+		            			 (int)((312 + (xCoord * 13)) + x),
+		            			 (int)((312 + (yCoord * -13)) + y));
+	            	
+		            g2d.drawLine((int)((312 + (xCoord * 13)) - prevx),
+		            		     (int)((312 + (yCoord * -13)) + prevy),
+		            		     (int)((312 + (xCoord * 13)) - x),
+		            		     (int)((312 + (yCoord * -13)) + y));
+	            }
+	        }  
+		}
 	}
 	
 // GETTERS
