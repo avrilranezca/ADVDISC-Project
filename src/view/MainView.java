@@ -31,6 +31,8 @@ public class MainView {
 	public static int ROTATE_270     = 3;
 	public static int REFLECT_X      = 1;
 	public static int REFLECT_Y	     = 2;
+	public static int SHEAR_X        = 1;
+	public static int SHEAR_Y        = 2;
 	
 	public MainView(){
 		mainFrame      = new MainFrame(this);			 // Create window

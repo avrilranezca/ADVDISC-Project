@@ -614,10 +614,18 @@ public class OptionsPanel extends JPanel {
 				|| currObj instanceof PolygonDrawer){
 					
 				JPanel flow1 = new JPanel();
-				flow1.add(new JLabel("Rotation (Degrees)"));
+					flow1.add(new JLabel("Shear Value (Degrees)"));
 					field1 = new JTextField(5);
 					flow1.add(field1);
 					this.add(flow1);
+					
+				JPanel flow2 = new JPanel();
+					String[] ax = {"X-Axis",
+								   "Y-Axis"};
+					dropdown = new JComboBox(ax);
+					flow2.add(dropdown);
+					this.add(flow2);
+					
 				
 				buttonCancel = new JButton("Cancel");
 					buttonCancel.addActionListener(new cancelListener(this));
@@ -1333,10 +1341,11 @@ public class OptionsPanel extends JPanel {
 					
 					// Error checking
 					if(isValid(val)){
-						d = Double.parseDouble(field1.getText());
+						d        = Double.parseDouble(field1.getText());
+						int axis = dropdown.getSelectedIndex() + 1;
 
 						// Get new object values from model
-						data = Controller.shearObject(currentlyEditing, d);
+						data = Controller.shearObject(currentlyEditing, d, axis);
 					}
 				}
 			}

@@ -13,43 +13,6 @@ public class Controller {
 		holder = new MotherOf2DObjects();
 	}
 	
-// TEMPORARY: FOR TESTING
-	
-	public static double[][] editTest(int index){
-		if(view.getObject(index) instanceof PointDrawer){
-			double[][] test = {{10, -10}};
-			return test;
-		}
-		else if(view.getObject(index) instanceof LineDrawer){
-			double[][] test = {{10, -10},
-							   {0, 0}};
-			return test;
-		}
-		else if(view.getObject(index) instanceof EllipseDrawer){
-			double[][] test = {{5, 5},
-							   {10, 4}};
-			return test;
-		}
-		else if(view.getObject(index) instanceof PolygonDrawer){
-			double[][] test = {{5, 5},
-							   {10, 0},
-							   {5, -5},
-							   {0, 0}};
-			return test;
-		}
-		else if(view.getObject(index) instanceof ParabolaDrawer){
-			double[][] test = {{-5, -5},
-							   {4, 4}};
-			return test;
-		}
-		else{
-			double[][] test = {{-5, -5},
-					   		   {4, 6},
-					   		   {1, 0}};
-			return test;
-		}
-	}
-	
 // ADDING
 
 	/* Adds a point
@@ -162,9 +125,10 @@ public class Controller {
 	/* Shears object
 	 * @param index index in the list of object to be edited
 	 * @param deg   value of shearing in degrees
+	 * @param axis  axis for shearing (MainView.SHEAR_X or MainView.SHEAR_Y)
 	 * @return new matrix data of object*
 	 */
-	public static double[][] shearObject(int index, double deg) {
+	public static double[][] shearObject(int index, double deg, int axis) {
 		// rotate object in model
 		holder.getObject(index).shearX(deg);
 		return holder.getObjectArray(index);
