@@ -53,13 +53,13 @@ public class Ellipse extends Object2D{
 	@Override
 	public void reflectOverX() {
 		// TODO Auto-generated method stub
-		center.reflectOverY();
+		center.reflectOverX();
 	}
 
 	@Override
 	public void reflectOverY() {
 		// TODO Auto-generated method stub
-		center.reflectOverX();
+		center.reflectOverY();
 	}
 
 	@Override
