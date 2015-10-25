@@ -67,8 +67,9 @@ public class MainView {
 // SETTERS
 	
 	/* Selects previous object
-	*/
-	public void movePrevObject(){
+	 * @return true if successful, false otherwise
+	 */
+	public boolean movePrevObject(){
 		if(objectList.size() > 0){
 			if(selectedObject == 0){
 				selectedObject = objectList.size() - 1;
@@ -77,12 +78,15 @@ public class MainView {
 				selectedObject = (selectedObject - 1) % objectList.size();
 			}
 			refreshGrid();
+			return true;
 		}
+		return false;
 	}
 	
 	/* Selects next object
-	*/
-	public void moveNextObject(){
+	 * @return true if successful, false otherwise
+	 */
+	public boolean moveNextObject(){
 		if(objectList.size() > 0){
 			if(selectedObject == objectList.size() - 1){
 				selectedObject = 0;
@@ -91,7 +95,9 @@ public class MainView {
 				selectedObject = (selectedObject + 1) % objectList.size();
 			}
 			refreshGrid();
+			return true;
 		}
+		return false;
 	}
 	
 	/* Redraws grid and objects

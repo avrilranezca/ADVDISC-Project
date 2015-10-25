@@ -26,6 +26,7 @@ public class OptionsPanel extends JPanel {
 	JLabel  labelSelect;
 	JButton buttonPrev;
 	JButton buttonNext;
+	JLabel  labelSelected;
 	
 	// "Add Object" UI elements
 	JLabel  labelAdd;
@@ -78,100 +79,104 @@ public class OptionsPanel extends JPanel {
 		// Panel Input
 			
 		panelInput = new JPanel();
-			panelInput.setMinimumSize(new Dimension(260, 290));
+			panelInput.setMinimumSize(new Dimension(260, 250));
 			panelInput.setLayout(new BorderLayout());
 			
 		scrollInput = new JScrollPane(panelInput);
 			this.add(scrollInput);
-			scrollInput.setBounds(10, 320, 265, 300);
+			scrollInput.setBounds(10, 360, 265, 260);
 			
 		
 		// Select Object
 		
-		labelSelect = new JLabel("Select Object");
+		labelSelect   = new JLabel("Select Object");
 			this.add(labelSelect);
 			labelSelect.setBounds(102, 0, 275, 30);
 		
-		buttonPrev  = new JButton("< Previous");
+		buttonPrev    = new JButton("< Previous");
 			this.add(buttonPrev);
 			buttonPrev.setBounds(0, 30, 145, 30);
 			buttonPrev.addActionListener(new selectPrevListener());
 		
-		buttonNext  = new JButton("Next >");
+		buttonNext    = new JButton("Next >");
 			this.add(buttonNext);
 			buttonNext.setBounds(140, 30, 145, 30);
 			buttonNext.addActionListener(new selectNextListener());
+			
+		labelSelected = new JLabel("No Selection");
+			this.add(labelSelected);
+			labelSelected.setBounds(10, 70, 290, 30);
 		
 		// Add Object
 		
 		labelAdd        = new JLabel("Add Object");
 			this.add(labelAdd);
-			labelAdd.setBounds(108, 70, 275, 30);
+			labelAdd.setBounds(108, 110, 275, 30);
 		
 		buttonPoint     = new JButton("Point");
 			this.add(buttonPoint);
-			buttonPoint.setBounds(0, 100, 145, 30);
+			buttonPoint.setBounds(0, 140, 145, 30);
 			buttonPoint.addActionListener(new addPointListener(panelInput));
 		
 		buttonLine      = new JButton("Line Segment");
 			this.add(buttonLine);
-			buttonLine.setBounds(140, 100, 145, 30);
+			buttonLine.setBounds(140, 140, 145, 30);
 			buttonLine.addActionListener(new addLineListener(panelInput));
 		
 		buttonEllipse   = new JButton("Ellipse");
 			this.add(buttonEllipse);
-			buttonEllipse.setBounds(0, 125, 145, 30);
+			buttonEllipse.setBounds(0, 165, 145, 30);
 			buttonEllipse.addActionListener(new addEllipseListener(panelInput));
 		
 		buttonPolygon   = new JButton("Polygon");
 			this.add(buttonPolygon);
-			buttonPolygon.setBounds(140, 125, 145, 30);
+			buttonPolygon.setBounds(140, 165, 145, 30);
 			buttonPolygon.addActionListener(new addPolygonListener(panelInput));
 		
 		buttonParabola  = new JButton("Parabola");
 			this.add(buttonParabola);
-			buttonParabola.setBounds(0, 150, 145, 30);
+			buttonParabola.setBounds(0, 190, 145, 30);
 			buttonParabola.addActionListener(new addParabolaListener(panelInput));
 		
 		buttonHyperbola = new JButton("Hyperbola");
 			this.add(buttonHyperbola);
-			buttonHyperbola.setBounds(140, 150, 145, 30);
+			buttonHyperbola.setBounds(140, 190, 145, 30);
 			buttonHyperbola.addActionListener(new addHyperbolaListener(panelInput));
 		
 		// Edit Object
 		
 		labelEdit       = new JLabel("Edit Object");
 			this.add(labelEdit);
-			labelEdit.setBounds(107, 190, 275, 30);
+			labelEdit.setBounds(107, 230, 275, 30);
 		
 		buttonTranslate = new JButton("Translate");
 			this.add(buttonTranslate);
-			buttonTranslate.setBounds(0, 220, 145, 30);
+			buttonTranslate.setBounds(0, 260, 145, 30);
 			buttonTranslate.addActionListener(new editListener(panelInput, MainView.EDIT_TRANSLATE));
 		
 		buttonRotate    = new JButton("Rotate");
 			this.add(buttonRotate);
-			buttonRotate.setBounds(140, 220, 145, 30);
+			buttonRotate.setBounds(140, 260, 145, 30);
 			buttonRotate.addActionListener(new editListener(panelInput, MainView.EDIT_ROTATE));
 		
 		buttonShear     = new JButton("Shear");
 			this.add(buttonShear);
-			buttonShear.setBounds(0, 245, 145, 30);
+			buttonShear.setBounds(0, 285, 145, 30);
 			buttonShear.addActionListener(new editListener(panelInput, MainView.EDIT_SHEAR));
 		
 		buttonScale     = new JButton("Scale");
 			this.add(buttonScale);
-			buttonScale.setBounds(140, 245, 145, 30);
+			buttonScale.setBounds(140, 285, 145, 30);
 			buttonScale.addActionListener(new editListener(panelInput, MainView.EDIT_SCALE));
 		
 		buttonReflect   = new JButton("Reflect");
 			this.add(buttonReflect);
-			buttonReflect.setBounds(0, 270, 145, 30);
+			buttonReflect.setBounds(0, 310, 145, 30);
 			buttonReflect.addActionListener(new editListener(panelInput, MainView.EDIT_REFLECT));
 		
 		buttonDelete    = new JButton("Delete");
 			this.add(buttonDelete);
-			buttonDelete.setBounds(140, 270, 145, 30);
+			buttonDelete.setBounds(140, 310, 145, 30);
 			buttonDelete.addActionListener(new editListener(panelInput, MainView.EDIT_DELETE));
 	}
 	
@@ -225,6 +230,39 @@ public class OptionsPanel extends JPanel {
 		panelInput.removeAll();
 		repaint();
 		revalidate();
+	}
+	
+	/* Updates selection text
+	 */
+	private void updateSelectedText(){
+		if(view.getObjectCount() > 0){
+			GraphicObject o = view.getObject(view.getSelectedObject());
+			String        t = "Unknown";
+			
+			if(o instanceof PointDrawer){
+				t = "Point";
+			}
+			else if(o instanceof LineDrawer){
+				t = "Line Segment";
+			}
+			else if(o instanceof EllipseDrawer){
+				t = "Ellipse";
+			}
+			else if(o instanceof PolygonDrawer){
+				t = "Polygon";
+			}
+			else if(o instanceof ParabolaDrawer){
+				t = "Parabola";
+			}
+			else if(o instanceof HyperbolaDrawer){
+				t = "Hyperbola";
+			}
+			labelSelected.setText("Object " + (view.getSelectedObject()+1)
+								  + ": " + t);
+		}
+		else{
+			labelSelected.setText("No Selection");
+		}
 	}
 	
 // INPUT PANELS (ADDING)
@@ -883,7 +921,9 @@ public class OptionsPanel extends JPanel {
 
 			if(editing == 0){
 				System.out.println("OptionsPanel > selectPrevListener (event): editing == 0");
-				view.movePrevObject();
+				if(view.movePrevObject()){
+					updateSelectedText();
+				}
 			}
 		}
 	}
@@ -895,7 +935,9 @@ public class OptionsPanel extends JPanel {
 
 			if(editing == 0){
 				System.out.println("OptionsPanel > selectNextListener (event): editing == 0");
-				view.moveNextObject();
+				if(view.moveNextObject()){
+					updateSelectedText();
+				}
 			}
 		}
 	}
@@ -1047,6 +1089,7 @@ public class OptionsPanel extends JPanel {
 					if(Controller.addPoint(x, y)){ 
 						view.addPoint(x, y);
 						clearInputPanel();
+						updateSelectedText();
 					}
 				}
 				else{
@@ -1078,6 +1121,7 @@ public class OptionsPanel extends JPanel {
 					if(Controller.addLine(x1, y1, x2, y2)){
 						view.addLine(x1, y1, x2, y2);
 						clearInputPanel();
+						updateSelectedText();
 					}
 				}
 				else{
@@ -1110,6 +1154,7 @@ public class OptionsPanel extends JPanel {
 					if(Controller.addEllipse(x, y, w, h)){
 						view.addEllipse(x, y, w, h);
 						clearInputPanel();
+						updateSelectedText();
 					}
 				}
 				else{
@@ -1141,6 +1186,7 @@ public class OptionsPanel extends JPanel {
 				if(Controller.addPolygon(points)){
 					view.addPolygon(points);
 					clearInputPanel();
+					updateSelectedText();
 				}
 			}
 		}
@@ -1165,6 +1211,7 @@ public class OptionsPanel extends JPanel {
 					if(Controller.addParabola(x, y, f, d)){
 						view.addParabola(x, y, f, d);
 						clearInputPanel();
+						updateSelectedText();
 					}
 				}
 				else{
@@ -1198,6 +1245,7 @@ public class OptionsPanel extends JPanel {
 					if(Controller.addHyperbola(x, y, xd, yd, d)){
 						view.addHyperbola(x, y, xd, yd, d);
 						clearInputPanel();
+						updateSelectedText();
 					}
 				}
 				else{
@@ -1253,6 +1301,7 @@ public class OptionsPanel extends JPanel {
 						if(Controller.deleteObject(currentlyEditing)){
 							view.deleteObject(currentlyEditing);
 							editing = 0;
+							updateSelectedText();
 						}
 					}
 					
