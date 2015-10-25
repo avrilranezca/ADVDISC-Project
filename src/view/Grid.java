@@ -64,20 +64,5 @@ public class Grid extends Canvas {
 	    	}
 	    	view.getObject(i).paint(g);
 	    }
-	    
-	    
-//	    new RectangleDrawer(-10, 5, 10, 5, false).paint(g);
-//	    new PointDrawer(-10, 5, false).paint(g);
-//	    new EllipseDrawer(0, 0, 4, 2, false).paint(g);
-//	    new LineDrawer(0, 1, 5, 6, false).paint(g);
-//	    double[][] points = new double[3][2];
-//	    points[0][0] = 0;
-//	    points[0][1] = 0;
-//	    points[1][0] = 2;
-//	    points[1][1] = 3;
-//	    points[2][0] = 4;
-//	    points[2][1] = -4;
-//	    new PolygonDrawer(points, false).paint(g);
-//	    new HyperbolaDrawer(1, 2, 1, 2, false).paint(g);
     }
 }

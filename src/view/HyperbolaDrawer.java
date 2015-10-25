@@ -28,14 +28,14 @@ public class HyperbolaDrawer extends GraphicObject {
 			for(int x=0;x<=500;x++){
 				
 				if(x == 0){
-					y  = (yDistance * 13 * Math.sqrt(Math.pow((x - xCoord * 13)/(xDistance * 13), 2) - 1));
+					y  = (yDistance * 13 * Math.sqrt(Math.pow(x/(xDistance * 13), 2) - 1));
 					prevy = y;
 					prevx = x;
 				}
 				else{
 					prevy = y;
 					prevx = x - 1;
-		            y = (yDistance * 13 * Math.sqrt(Math.pow((x - xCoord * 13)/(xDistance * 13), 2) - 1));
+		            y = (yDistance * 13 * Math.sqrt(Math.pow(x/(xDistance * 13), 2) - 1));
 		            if(Double.isNaN(prevy)){
 						prevy = y;
 						prevx = x;
@@ -44,78 +44,76 @@ public class HyperbolaDrawer extends GraphicObject {
 				
 				if(!Double.isNaN(y) && !Double.isNaN(x)){
 					// Lower Right
-					g2d.drawLine((int)(312 + prevx),
+					g2d.drawLine((int)(312 + prevx + xCoord * 13),
 								 (int)(312 + prevy - yCoord * 13), 
-								 (int)(312 + x),
+								 (int)(312 + x + xCoord * 13),
 								 (int)(312 + y - yCoord * 13));
 					
 					// Upper Right
-					g2d.drawLine((int)(312 + prevx),
+					g2d.drawLine((int)(312 + prevx + xCoord * 13),
 								 (int)(312 - prevy - yCoord * 13), 
-								 (int)(312 + x),
+								 (int)(312 + x + xCoord * 13),
 								 (int)(312 - y - yCoord * 13));
 					
 					// Lower Left
-					g2d.drawLine((int)(312 - prevx + xCoord * 26),
+					g2d.drawLine((int)(312 - prevx + xCoord * 13),
 								 (int)(312 + prevy - yCoord * 13), 
-								 (int)(312 - x + xCoord * 26),
+								 (int)(312 - x + xCoord * 13),
 								 (int)(312 + y - yCoord * 13));
 					
 					// Upper Left
-					g2d.drawLine((int)(312 - prevx + xCoord * 26),
+					g2d.drawLine((int)(312 - prevx + xCoord * 13),
 								 (int)(312 - prevy - yCoord * 13), 
-								 (int)(312 - x + xCoord * 26),
+								 (int)(312 - x + xCoord * 13),
 								 (int)(312 - y - yCoord * 13));
 				}
 			}
 		}
 		if(direction == 2){
-			double y = 0;
+			double x = 0;
 			double prevy;
 			double prevx;
 			
-			for(int x=0;x<=500;x++){
-				if(x == 0){
-		            y = (yDistance * 13 * Math.sqrt(Math.pow((x - xCoord * 13)/(xDistance * 13), 2) + 1));
+			for(int y=0;y<=500;y++){
+				if(y == 0){
+		            x = (xDistance * 13 * Math.sqrt(Math.pow(y/(yDistance * 13), 2) - 1));
 					prevy = y;
 					prevx = x;
 				}
 				else{
-					prevx = x - 1;
-					prevy = y;
-		            y = (yDistance * 13 * Math.sqrt(Math.pow((x - xCoord * 13)/(xDistance * 13), 2) + 1));
-//		            x = (xDistance * 13 * Math.sqrt(Math.pow((y - yCoord * 13)/(yDistance * 13), 2) + 1) + xCoord * 13);
-		            if(Double.isNaN(prevy)){
+					prevy = y - 1;
+					prevx = x;
+		            x = (xDistance * 13 * Math.sqrt(Math.pow(y/(yDistance * 13), 2) - 1));
+		            if(Double.isNaN(prevx)){
 						prevy = y;
 						prevx = x;
 					}
 				}
 				
 				if(!Double.isNaN(y) && !Double.isNaN(x)){
-					
 					// Lower Right
-					g2d.drawLine((int)(312 + prevx),
-				   			 	 (int)(312 - yCoord * 13 + prevy),
-				   			 	 (int)(312 + x),
-				   			 	 (int)(312 - yCoord * 13 + y));
+					g2d.drawLine((int)(312 + prevx + xCoord * 13),
+								 (int)(312 + prevy - yCoord * 13), 
+								 (int)(312 + x + xCoord * 13),
+								 (int)(312 + y - yCoord * 13));
 					
 					// Upper Right
-					g2d.drawLine((int)(312 + prevx),
-				   			 	 (int)(312 - yCoord * 13 - prevy),
-				   			 	 (int)(312 + x),
-				   			 	 (int)(312 - yCoord * 13 - y));
+					g2d.drawLine((int)(312 + prevx + xCoord * 13),
+								 (int)(312 - prevy - yCoord * 13), 
+								 (int)(312 + x + xCoord * 13),
+								 (int)(312 - y - yCoord * 13));
 					
 					// Lower Left
-					g2d.drawLine((int)(312 - prevx + xCoord * 26),
-				   			 	 (int)(312 - yCoord * 13 + prevy),
-				   			 	 (int)(312 - x + xCoord * 26),
-				   			 	 (int)(312 - yCoord * 13 + y));
+					g2d.drawLine((int)(312 - prevx + xCoord * 13),
+								 (int)(312 + prevy - yCoord * 13), 
+								 (int)(312 - x + xCoord * 13),
+								 (int)(312 + y - yCoord * 13));
 					
 					// Upper Left
-					g2d.drawLine((int)(312 - prevx + xCoord * 26),
-				   			 	 (int)(312 - yCoord * 13 - prevy),
-				   			 	 (int)(312 - x + xCoord * 26),
-				   			 	 (int)(312 - yCoord * 13 - y));
+					g2d.drawLine((int)(312 - prevx + xCoord * 13),
+								 (int)(312 - prevy - yCoord * 13), 
+								 (int)(312 - x + xCoord * 13),
+								 (int)(312 - y - yCoord * 13));
 				}
 			}
 		}
@@ -144,5 +142,16 @@ public class HyperbolaDrawer extends GraphicObject {
 		
 	}
 		
+// TOSTRING
+	
+	public String toString(){
+		return "\nHyperbolaDrawer - - - - - - - - - - - - - - - - - - - -" +
+			   "\nxCoord: " + xCoord +
+			   "\nyCoord: " + yCoord +
+			   "\nxDistance: " + xDistance +
+			   "\nyDistance: " + yDistance +
+			   "\nDirection: " + MainView.getHDirectionString(direction) +
+			   "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+	}
 	
 }
