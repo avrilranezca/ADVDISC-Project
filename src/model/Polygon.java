@@ -60,11 +60,10 @@ public class Polygon extends Object2D{
 			point.setX(point.getX() - center.getX());
 			point.setY(point.getY() - center.getY());
 			
-			double newX = point.getX() * Math.cos(angle) - point.getY() * Math.sin(angle);
-			double newY = point.getX() * Math.sin(angle) + point.getY() * Math.cos(angle);
+			point.rotate(angle);
 			
-			point.setX(newX + center.getX());
-			point.setY(newY + center.getY());
+			point.setX(point.getX() + center.getX());
+			point.setY(point.getY() + center.getY());
 		}
 	}
 
