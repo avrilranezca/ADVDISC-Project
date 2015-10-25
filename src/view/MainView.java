@@ -206,7 +206,7 @@ public class MainView {
 		else if(o instanceof ParabolaDrawer){
 			objectList.set(index, new ParabolaDrawer(data[0][0], data[0][1], data[1][0], (int)data[1][1], false));
 		}
-		else if(o instanceof PolygonDrawer){
+		else if(o instanceof HyperbolaDrawer){
 			objectList.set(index, new HyperbolaDrawer(data[0][0], data[0][1], data[1][0], data[1][1], (int)data[2][0], false));
 		}
 		
