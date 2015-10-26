@@ -121,7 +121,7 @@ public class Point extends Object2D{
 			}
 		}
 		
-		shearingMatrix[0][1] = Math.tan(angle);
+		shearingMatrix[0][1] = Math.tan(Math.toRadians(angle));
 		coordinates = Matrix.multiply(shearingMatrix, coordinates);
 	}
 
@@ -137,7 +137,7 @@ public class Point extends Object2D{
 			}
 		}
 		
-		shearingMatrix[1][0] = Math.tan(angle);
+		shearingMatrix[1][0] = Math.tan(Math.toRadians(angle));
 		coordinates = Matrix.multiply(shearingMatrix, coordinates);
 	}
 
